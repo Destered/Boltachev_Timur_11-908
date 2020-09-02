@@ -1,0 +1,28 @@
+        table, td {
+            border: 1px solid gray;
+        }
+        table {
+            border-collapse: separate;
+        }
+		td {
+			padding: 0px;
+		}
+		button{
+
+		}
+		.textClass{
+			font-style : italic
+		}
+		hr{
+			width:initial;
+		}
+		fieldset {
+			text-align: center;
+			border: 0px
+		}
+		.lineChild
+		{
+			display: inline-block;
+			width: 10%;
+		}
+	

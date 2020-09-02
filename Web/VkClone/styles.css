@@ -1,0 +1,94 @@
+body {
+    color: #8f8f8f;
+    font: 12px Tahoma, sans-serif;
+    background-color: #edeef0;
+    margin: 0;
+}
+#wrapper {
+    margin: auto;
+}
+
+input[name="q"] {
+    background: #224b7a;
+    border: none;
+    outline: none;
+    text-indent: 32px;
+    border-radius: 40px;
+    height: 16px;
+    line-height: 20px;
+    width: 230px;
+    padding-top: 11px;
+    margin-bottom: 5px;
+
+}
+.search-wrapper {
+    position: relative;
+}
+
+.search-wrapper img {
+    position: absolute;
+    top: 10px;
+    left: 210px;
+}
+
+::placeholder{
+    color: #7e9ebc;
+    font-size: 12px;
+    font-weight:bold;
+
+}
+form[name="search"]{
+    color: #edeef0;
+    float: top;
+    padding-left: 200px;
+    padding-top: 3px;
+    position: center;
+}
+
+
+header{
+    background-color: #4a76a8;
+    padding: 0px 0 2px;
+}
+img[alt="VK logo"]{
+    padding-top: 11px;
+    padding-left: 175px;
+}
+img[alt="Notify"]{
+    padding-left: 325px;
+}
+img[alt="Music"]{
+    padding-top: 10px;
+    padding-left: 235px;
+}
+
+aside {
+    float: left;
+    width: 250px;
+}
+section {
+    margin-left: 280px;
+    padding-bottom: 50px;
+}
+.lineChild
+{
+    display: inline-block;
+    width: 10%;
+}
+.aside-menu li {
+    font-weight: 300;
+    list-style-type: square;
+    border-top: 1px solid #e7e7e7;
+}
+
+.aside-menu li:first-child {
+    border: none;
+}
+
+.aside-menu li.active {
+    color: #29c5e6;
+}
+
+.aside-menu a {
+    color: #526398;
+}
