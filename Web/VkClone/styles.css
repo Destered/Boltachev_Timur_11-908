@@ -3,82 +3,173 @@ body {
     font: 12px Tahoma, sans-serif;
     background-color: #edeef0;
     margin: 0;
+    width: 1366px;
+    overflow-x: hidden;
 }
+
 #wrapper {
     margin: auto;
 }
 
-input[name="q"] {
+.userUpper {
+    position: absolute;
+    width: 114.34px;
+    height: 42px;
+    margin-right: 100px;
+    top: 0;
+    left: 1020px;
+}
+
+.userUpper:hover {
+    background: #466998;
+    cursor: pointer
+}
+
+button[name="dot"] {
+    background-color: #e5ebf1;
+    border: none;
+    color: #55677d;
+    text-align: center;
+    width: 36px;
+    height: 30px;
+    margin-bottom: 3px;
+    line-height: 3px;
+    border-radius: 3px;
+    position: relative;
+    right: -1px;
+    bottom: 17px;
+    outline: none;
+}
+
+button[name="dot"]:hover {
+    cursor: pointer
+}
+
+img[name="profile_dot"] {
+    position: relative;
+    top: -2.5px;
+    right: 12px;
+}
+
+input[name="edit"] {
+    background-color: #e5ebf1;
+    color: #55677d;
+    position: relative;
+    border: none;
+    bottom: 34px;
+    left: -1.5px;
+    text-align: center;
+    display: inline;
+    width: 157px;
+    height: 30px;
+    padding: 7px 3px 10px 3px;
+    border-radius: 4px;
+    line-height: 3px;
+    outline: none;
+}
+
+input[name="edit"]:hover {
+    cursor: pointer
+}
+
+img[alt="Avatar Small"] {
+    position: relative;
+    border-radius: 150px;
+    top: -32px;
+    left: 60px;
+    width: 28px;
+    height: 28px;
+
+}
+
+img[alt="Counter Arrow"] {
+    position: relative;
+    top: -43px;
+    left: 67px;
+}
+
+p[name="UserName"] {
+    position: relative;
+    left: 10px;
+    color: white;
+    font-weight: bold;
+}
+
+input[name="headerBorder"] {
+    position: absolute;
     background: #224b7a;
     border: none;
     outline: none;
     text-indent: 32px;
     border-radius: 40px;
-    height: 16px;
+    height: 28px;
     line-height: 20px;
     width: 230px;
-    padding-top: 11px;
-    margin-bottom: 5px;
+    top: 7px;
+    bottom: 5px;
+    left: 340px;
 
 }
-.search-wrapper {
-    position: relative;
+
+::placeholder {
+    color: #7e9ebc;
+    font: 400 13.3333px Arial;
 }
 
-.search-wrapper img {
+header {
+    background-color: #4a76a8;
+    padding: 40px 100% 2px;
+    position: fixed;
+    z-index: 100;
+}
+
+img[alt="VK logo"] {
+    position: absolute;
+    top: 11px;
+    left: 175px;
+}
+
+img[alt="Notify"] {
     position: absolute;
     top: 10px;
-    left: 210px;
+    left: 598px;
 }
 
-::placeholder{
-    color: #7e9ebc;
-    font-size: 12px;
-    font-weight:bold;
-
-}
-form[name="search"]{
-    color: #edeef0;
-    float: top;
-    padding-left: 200px;
-    padding-top: 3px;
-    position: center;
+img[alt="Music"] {
+    position: absolute;
+    top: 11px;
+    left: 644px;
 }
 
-
-header{
-    background-color: #4a76a8;
-    padding: 0px 0 2px;
-}
-img[alt="VK logo"]{
-    padding-top: 11px;
-    padding-left: 175px;
-}
-img[alt="Notify"]{
-    padding-left: 325px;
-}
-img[alt="Music"]{
-    padding-top: 10px;
-    padding-left: 235px;
+img[alt="Search image"] {
+    position: absolute;
+    top: 13px;
+    bottom: 5px;
+    left: 350px;
 }
 
 aside {
-    float: left;
+    position: absolute;
+    top: 6px;
+    left: 123px;
     width: 250px;
+    border-radius: 4px;
 }
+
 section {
-    margin-left: 280px;
+    padding-left: 280px;
     padding-bottom: 50px;
 }
-.lineChild
-{
-    display: inline-block;
-    width: 10%;
-}
+
 .aside-menu li {
+    position: relative;
+    top: 42px;
     font-weight: 300;
-    list-style-type: square;
-    border-top: 1px solid #e7e7e7;
+    list-style-type: none;
+}
+
+li[name="none"] {
+    list-style-type: none;
 }
 
 .aside-menu li:first-child {
@@ -91,4 +182,1145 @@ section {
 
 .aside-menu a {
     color: #526398;
+    text-decoration: none;
+    font-size: 13px;
 }
+
+hr[name="none"]{
+    position: relative;
+    width: 122px;
+    border: 0.5px solid #e3e3e3;
+    margin: 10.2px;
+    left: 30px;
+    top: -4px;
+}
+li[name="none"]{
+
+}
+
+.menuBlock{
+    width: 157px;
+    height: 28px;
+
+}
+.menuBlock:hover{
+background: #dae2ea;
+}
+.menuBlock img{
+    position: relative;
+    width: 14px;
+    height: 13px;
+    left: 13px;
+    top: 5px;
+
+}
+.menuBlock p{
+    position: relative;
+    top: -25px;
+    left: 40px;
+    width: 122px;
+    height: 28px;
+
+}
+
+html {
+    box-sizing: border-box;
+}
+
+*, *::before, *::after {
+    box-sizing: inherit;
+}
+
+.block {
+    width: 232px;
+    height: 274px;
+    background-color: #ffffff;
+    position: absolute;
+    display: inline;
+    top: 56px;
+    left: 339px;
+    border-radius: 3px;
+    border: 0.5px solid #e3e3e3;
+}
+
+.block img {
+    position: relative;
+    padding: 15px 15px 15px 15px;
+}
+
+.block button {
+    position: relative;
+}
+
+
+.actContactBlock {
+    width: 232px;
+    height: 43px;
+    background-color: #ffffff;
+    position: absolute;
+    top: 343px;
+    left: 339px;
+    border-radius: 5px;
+    border: 0.5px solid #e3e3e3;
+}
+
+img[alt="contactHome"] {
+    position: relative;
+    top: 8px;
+    left: 10px;
+}
+
+p[name="actContactText"] {
+    position: relative;
+    top: -27px;
+    left: 42px;
+    color: black;
+    font-size: 13px;
+}
+
+img[alt="contactX"] {
+    position: relative;
+    top: -55px;
+    left: 210px;
+    color: #bcc8d4;
+}
+
+.userBlock {
+    display: inline;
+    width: 554px;
+    height: 233px;
+    background-color: #ffffff;
+    position: absolute;
+    top: 56px;
+    left: 583px;
+    border-radius: 5px;
+    border: 0.5px solid #e3e3e3;
+    z-index: 1;
+}
+
+h2[name="userBlock_Name"] {
+    display: inline;
+    font-weight: normal;
+    color: black;
+    position: relative;
+    top: 13px;
+    left: 23.5px;
+    letter-spacing: 0.75px;
+}
+
+img[alt="userSmile"] {
+    display: inline;
+    position: relative;
+    top: 15px;
+    left: 23px;
+}
+
+p[name="userStatus"] {
+    display: inline;
+    position: relative;
+    top: 12px;
+    left: 327px;
+}
+
+button[name="changeStatus"] {
+    display: inline;
+    position: relative;
+    width: 509px;
+    height: 23px;
+    left: 17px;
+    top: 14px;
+    text-align: left;
+    border: none;
+    background: white;
+    border-radius: 3px;
+    outline: none;
+}
+
+hr[name="firstLine"] {
+    position: relative;
+    top: 20px;
+    border: none;
+    color: #eaeaea;
+    background-color: #eaeaea;
+    height: 1px;
+    width: 510px;
+}
+
+button[name="changeStatus"]:hover {
+    background: #efefef;
+    cursor: pointer
+}
+
+p[name="changeStatus"] {
+    display: inline;
+    position: relative;
+    color: gray;
+}
+
+p[name="schoolPlace"] {
+    color: gray;
+    display: inline;
+    position: relative;
+    top: 32px;
+    left: 25px;
+    letter-spacing: 0.35px;
+}
+
+a[name="schoolLink"] {
+    display: inline;
+    color: #2a5885;
+    position: relative;
+    top: 32px;
+    left: 105px;
+    text-decoration: none;
+}
+
+a[name="schoolLink"]:hover {
+    text-decoration: underline;
+    cursor: pointer
+}
+
+.userBlockInfo {
+    width: 510px;
+    height: 34px;
+    background: white;
+    position: relative;
+    top: 33px;
+    left: 22px;
+}
+
+.userBlockInfo:hover {
+    background: #efefef;
+    cursor: pointer
+}
+
+p[name="userBlockInfo"] {
+    position: relative;
+    top: 7px;
+    left: 165px;
+    color: #2a5885;
+    letter-spacing: 0.38px;
+    font-size: 12px;
+}
+
+hr[name="secondLine"] {
+    position: relative;
+    top: 35px;
+    border: none;
+    color: #eaeaea;
+    background-color: #eaeaea;
+    height: 1px;
+    width: 100%;
+}
+
+.userBlockFriend {
+    width: 63.75px;
+    height: 69px;
+    position: relative;
+    top: 35px;
+    left: 25px;
+}
+
+.userBlockSubribe {
+    width: 110.42px;
+    height: 69px;
+    position: relative;
+    top: 30px;
+    left: 30px;
+}
+
+.userBlockPhoto {
+    width: 104.34px;
+    height: 69px;
+    position: relative;
+    top: 30px;
+    left: 30px;
+}
+
+.userBlockVideo {
+    width: 116.95px;
+    height: 69px;
+    position: relative;
+    top: 30px;
+    left: 30px;
+}
+
+.userBlockMusic {
+    width: 115.42px;
+    height: 69px;
+    position: relative;
+    top: 30px;
+    left: 30px;
+}
+
+a[name="userBlockFriend"] {
+    position: relative;
+    display: inline;
+    top: -6px;
+    left: 10px;
+}
+
+p[name="userBlockFriendNum"] {
+    position: relative;
+    color: #2a5885;
+    font-size: 20px;
+}
+
+p[name="userBlockFriendString"] {
+    position: relative;
+    color: gray;
+    bottom: 17px;
+    letter-spacing: 0.4px;
+}
+
+a[name="userBlockSubscribe"] {
+    position: relative;
+    display: inline;
+    top: -60px;
+    left: -135px;
+}
+
+p[name="userBlockSubscribeNum"] {
+    position: relative;
+    color: #2a5885;
+    font-size: 20px;
+    text-align: center;
+}
+
+p[name="userBlockSubscribeString"] {
+    position: relative;
+    color: gray;
+    bottom: 17px;
+    letter-spacing: 0.4px;
+    text-align: center;
+}
+
+a[name="userBlockPhoto"] {
+    position: relative;
+    display: inline;
+    top: -168px;
+    left: 165px;
+}
+
+p[name="userBlockPhotoNum"] {
+    position: relative;
+    color: #2a5885;
+    font-size: 20px;
+    text-align: center;
+}
+
+p[name="userBlockPhotoString"] {
+    position: relative;
+    color: gray;
+    bottom: 17px;
+    letter-spacing: 0.4px;
+    text-align: center;
+}
+
+a[name="userBlockVideo"] {
+    position: relative;
+    display: inline;
+    top: -258px;
+    left: 270px;
+}
+
+p[name="userBlockVideoNum"] {
+    position: relative;
+    color: #2a5885;
+    font-size: 20px;
+    text-align: center;
+}
+
+p[name="userBlockVideoString"] {
+    position: relative;
+    color: gray;
+    bottom: 17px;
+    letter-spacing: 0.4px;
+    text-align: center;
+}
+
+a[name="userBlockMusic"] {
+    position: relative;
+    display: inline;
+    top: -347px;
+    left: 384px;
+}
+
+p[name="userBlockMusicNum"] {
+    position: relative;
+    color: #2a5885;
+    font-size: 20px;
+    text-align: center;
+}
+
+p[name="userBlockMusicString"] {
+    position: relative;
+    color: gray;
+    bottom: 17px;
+    letter-spacing: 0.4px;
+    text-align: center;
+}
+
+
+.giftBlock {
+    width: 232px;
+    height: 122px;
+    background-color: #ffffff;
+    position: absolute;
+    top: 399px;
+    left: 339px;
+    border-radius: 5px;
+    border: 0.5px solid #e3e3e3;
+}
+
+p[name="giftBlockString"] {
+    position: relative;
+    color: black;
+    top: -40px;
+    left: 15px;
+    display: inline;
+    letter-spacing: 0.4px;
+}
+
+p[name="giftBlockString"]:hover {
+    cursor: pointer;
+}
+
+p[name="giftBlockNum"] {
+    display: inline;
+    position: relative;
+    color: gray;
+    top: -40px;
+    left: 18px;
+}
+
+p[name="giftBlockNum"]:hover {
+    cursor: pointer;
+}
+
+img[alt="gift1"] {
+    display: inline;
+    position: relative;
+    width: 64px;
+    height: 64px;
+    top: 42px;
+    left: -61px;
+    cursor: pointer;
+}
+
+img[alt="gift2"] {
+    display: inline;
+    position: relative;
+    width: 64px;
+    height: 64px;
+    top: 42px;
+    left: -61px;
+    cursor: pointer;
+}
+
+img[alt="gift3"] {
+    display: inline;
+    position: relative;
+    width: 64px;
+    height: 64px;
+    top: -24px;
+    left: 151px;
+    cursor: pointer;
+}
+
+.friendBlock {
+    width: 232px;
+    height: 426px;
+    background-color: #ffffff;
+    position: absolute;
+    top: 534.5px;
+    left: 339px;
+    border-radius: 5px;
+    border: 0.5px solid #e3e3e3;
+}
+
+p[name="friendBlockString"] {
+    position: relative;
+    color: black;
+    top: 13px;
+    left: 15px;
+    display: inline;
+    letter-spacing: 0.43px;
+}
+
+p[name="friendBlockString"]:hover {
+    cursor: pointer;
+}
+
+p[name="friendBlockNum"] {
+    display: inline;
+    position: relative;
+    color: gray;
+    left: 18px;
+    top: 13px;
+}
+
+p[name="friendBlockNum"]:hover {
+    cursor: pointer;
+}
+
+p[name="friendBlockRefresh"] {
+    position: relative;
+    display: inline;
+    top: 12px;
+    left: 76px;
+    font-size: 13px;
+    letter-spacing: 0.25px;
+}
+
+p[name="friendBlockRefresh"]:hover {
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.friendUser {
+    width: 70px;
+    height: 83px;
+    position: relative;
+    z-index: 2;
+}
+
+.friendUser img {
+    position: relative;
+    left: 10px;
+    top: 3px;
+    border-radius: 150px;
+}
+
+.friendUser p {
+    color: #2a5885;
+    left: 15px;
+    top: -5px;
+    position: relative;
+    cursor: pointer;
+}
+
+.friendUser p:hover {
+    text-decoration: underline;
+}
+
+div[name="Mirlan"] {
+    top: 27px;
+    left: 10px;
+}
+
+div[name="Andres"] {
+    top: -56px;
+    left: 80px;
+}
+
+div[name="Danil"] {
+    top: -139px;
+    left: 150px;
+}
+
+div[name="Dima"] {
+    top: -139px;
+    left: 10px;
+}
+
+div[name="Gulnaz"] {
+    top: -222px;
+    left: 80px;
+}
+
+div[name="Nikita"] {
+    top: -305px;
+    left: 150px;
+}
+
+hr[name="friendLine"] {
+    position: relative;
+    top: -305px;
+    border: none;
+    color: #eaeaea;
+    background-color: #eaeaea;
+    height: 0.2px;
+    width: 100%;
+}
+
+p[name="onlineFriendString"] {
+    position: relative;
+    color: black;
+    top: -298px;
+    left: 15px;
+    display: inline;
+    letter-spacing: 0.43px;
+}
+
+p[name="onlineFriendString"]:hover {
+    cursor: pointer;
+}
+
+p[name="onlineFriendNum"] {
+    display: inline;
+    position: relative;
+    color: gray;
+    left: 18px;
+    top: -298px;
+}
+
+p[name="onlineFriendNum"] {
+    cursor: pointer;
+}
+
+div[name="Sergey"] {
+    top: -452px;
+    left: 10px;
+}
+
+div[name="Roma"] {
+    top: -368px;
+    left: 80px;
+}
+
+div[name="Radislav"] {
+    top: -286px;
+    left: 150px;
+}
+
+div[name="AndresO"] {
+    top: -450px;
+    left: 10px;
+}
+
+.photoBlock {
+    width: 552px;
+    height: 191px;
+    background-color: #ffffff;
+    position: absolute;
+    top: 303px;
+    left: 583px;
+    border-radius: 5px;
+    border: 0.5px solid #e3e3e3;
+}
+
+p[name="PhotoString"] {
+    position: relative;
+    color: black;
+    letter-spacing: 0.15px;
+    font-size: 13px;
+    top: 0;
+    left: 20px;
+}
+
+p[name="PhotoString"]:hover {
+    cursor: pointer;
+}
+
+p[name="PhotoNum"] {
+    position: relative;
+    top: -28px;
+    left: 132px;
+}
+
+p[name="PhotoNum"]:hover {
+    cursor: pointer;
+}
+
+a[name="ShowMap"] {
+    position: relative;
+    top: -165px;
+    left: 420px;
+    letter-spacing: 0.15px;
+    font-size: 13px;
+    text-decoration: none;
+    color: gray;
+}
+
+a[name="ShowMap"]:hover {
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+img[alt="Photo1"] {
+    position: relative;
+    width: 123px;
+    height: 123px;
+    top: -22px;
+    left: -100px;
+}
+
+img[alt="Photo2"] {
+    position: relative;
+    width: 123px;
+    height: 123px;
+    top: -22px;
+    left: -92px;
+}
+
+img[alt="Photo3"] {
+    position: relative;
+    width: 123px;
+    height: 123px;
+    top: -22px;
+    left: -90px;
+}
+
+img[alt="Photo4"] {
+    position: relative;
+    width: 123px;
+    height: 123px;
+    top: -148px;
+    left: 408px;
+}
+
+.newsBlock {
+    width: 552px;
+    height: 54px;
+    background-color: #ffffff;
+    position: absolute;
+    top: 507px;
+    left: 583px;
+    border-radius: 5px;
+    border: 0.5px solid #e3e3e3;
+}
+
+img[alt="newsBlockAvatar"] {
+    position: relative;
+    width: 28px;
+    height: 28px;
+    top: 13px;
+    left: 21px;
+}
+
+input[alt="newsBlockText"] {
+    position: relative;
+    width: 300px;
+    height: 20px;
+    top: 3px;
+    left: 24px;
+    z-index: 1;
+    border: none;
+    text-decoration: none;
+}
+
+input[alt="newsBlockText"]::placeholder {
+    letter-spacing: 0.15px;
+    font-size: 13px;
+    color: gray;
+    text-indent: 4px;
+    z-index: -1;
+}
+
+img[alt="newsBlockPhoto"] {
+    position: relative;
+    width: 20px;
+    height: 20px;
+    top: 9px;
+    left: 43px;
+}
+
+img[alt="newsBlockVideo"] {
+    position: relative;
+    width: 20px;
+    height: 20px;
+    top: 9px;
+    left: 46px;
+}
+
+img[alt="newsBlockMusic"] {
+    position: relative;
+    width: 20px;
+    height: 20px;
+    top: 10px;
+    left: 46px;
+}
+
+img[alt="newsBlockField"] {
+    position: relative;
+    width: 20px;
+    height: 20px;
+    top: 9px;
+    left: 50px;
+}
+
+img[alt="newsBlockPalitre"] {
+    position: relative;
+    width: 20px;
+    height: 20px;
+    top: 8px;
+    left: 80px;
+}
+
+.wallBlock {
+    width: 552px;
+    height: 583px;
+    background-color: #ffffff;
+    position: absolute;
+    top: 575px;
+    left: 583px;
+    border-radius: 5px;
+    border: 0.5px solid #e3e3e3;
+}
+
+p[name="wallBlockAll"] {
+    position: relative;
+    width: 80px;
+    height: 46px;
+    top: 2.5px;
+    left: 21px;
+    color: black;
+    letter-spacing: 0.15px;
+    font-size: 13px;
+}
+
+p[name="wallBlockMy"] {
+    position: relative;
+    width: 84.48px;
+    height: 46px;
+    top: -57px;
+    left: 110px;
+    color: dimgray;
+    letter-spacing: 0.15px;
+    font-size: 13px;
+}
+
+p[name="wallBlockArchive"] {
+    position: relative;
+    width: 102.16px;
+    height: 46px;
+    top: -116px;
+    left: 202px;
+    color: dimgray;
+    letter-spacing: 0.15px;
+    font-size: 13px;
+}
+
+img[alt="wallBlockSearch"] {
+    position: relative;
+    top: -173px;
+    left: 517px;
+}
+
+hr[name="wallBlockLine"] {
+    position: relative;
+    border: none;
+    color: #eaeaea;
+    background-color: #eaeaea;
+    height: 1px;
+    width: 100%;
+    top: -169px;
+}
+
+hr[name="wallBlockLineUnder"] {
+    position: relative;
+    border: none;
+    color: #5181b8;
+    background-color: #5181b8;
+    height: 2px;
+    width: 80px;
+    left: -220px;
+    top: -177px;
+}
+
+.wallBlockPost {
+    position: relative;
+    top: -180px;
+    width: 550px;
+    height: 536px;
+}
+
+img[alt="wallBlockPostAvatar"] {
+    position: relative;
+    top: 12px;
+    left: 21px;
+    border-radius: 150px;
+}
+
+a[name="wallBlockPostName"] {
+    position: relative;
+    top: -18px;
+    left: 32px;
+    letter-spacing: 0.15px;
+    font-size: 13.2px;
+    text-decoration: none;
+    color: #2a5885;
+}
+
+a[name="wallBlockPostName"]:hover {
+    text-decoration: underline;
+}
+
+p[name="wallBlockPostInfo"] {
+    position: relative;
+    top: -47px;
+    left: 189px;
+    letter-spacing: 0.15px;
+    font-size: 13.2px;
+    z-index: 1;
+}
+
+p[name="wallBlockPostDate"] {
+    position: relative;
+    top: -57px;
+    left: 86px;
+    letter-spacing: 0.15px;
+    font-size: 12.3px;
+}
+
+img[alt="wallBlockPostArrow"] {
+    position: relative;
+    width: 14px;
+    height: 15px;
+    top: -469px;
+    left: 515px;
+    z-index: 10;
+}
+
+img[alt="wallBlockPostPicture"] {
+    position: relative;
+    width: 510px;
+    height: 383px;
+    top: -42px;
+    left: 4px;
+}
+
+hr[name="wallBlockPostLine"] {
+    position: relative;
+    border: none;
+    color: gainsboro;
+    background-color: gainsboro;
+    height: 1px;
+    width: 510px;
+    top: -32px;
+}
+
+img[alt="wallBlockPostLike"] {
+    position: relative;
+    width: 22px;
+    height: 20px;
+    top: -24px;
+    left: 22px;
+}
+
+p[name="wallBlockPostLikeNum"] {
+    position: relative;
+    top: -62px;
+    left: 53px;
+    font-size: 15px;
+    color: gray;
+}
+
+img[alt="wallBlockPostRepost"] {
+    position: relative;
+    width: 24px;
+    height: 18px;
+    top: -92px;
+    left: 93px;
+}
+
+img[alt="wallBlockPostEye"] {
+    position: relative;
+    width: 15px;
+    height: 10px;
+    top: -96px;
+    left: 461px;
+}
+
+p[name="wallBlockPostEyeNum"] {
+    position: relative;
+    top: -124px;
+    left: 509px;
+    font-size: 13px;
+    color: gray;
+}
+
+.contentBlock {
+    width: 232px;
+    height: 872px;
+    position: absolute;
+    top: 974px;
+    left: 339px;
+    border-radius: 5px;
+    border: 0.5px solid #e3e3e3;
+    background: white;
+}
+
+.subscribe {
+    position: relative;
+    width: 230px;
+    height: 307px;
+    border-bottom: 0.5px solid gainsboro;
+    padding: 7px 6px;
+    background: white;
+}
+
+.subscribeBlock {
+    position: relative;
+    width: 200px;
+    height: 40px;
+    margin: 7px 7px;
+    background: white;
+}
+
+.subscribeBlock img {
+    border-radius: 300px;
+    width: 40px;
+    height: 40px;
+    position: relative;
+}
+
+.subscribeBlock a {
+    color: #5181b8;
+    position: relative;
+    top: -25px;
+    left: 8px;
+}
+
+.subscribeBlock p {
+    top: -35px;
+    left: 53px;
+    color: gray;
+    position: relative;
+}
+
+.titleBlock {
+    width: 230px;
+    height: 32px;
+}
+
+p[name="ContentString"] {
+    position: relative;
+    top: 10px;
+    left: 11px;
+    color: black;
+    display: inline;
+    letter-spacing: 0.15px;
+    font-size: 12.3px;
+}
+
+p[name="ContentNum"] {
+    position: relative;
+    top: 10px;
+    left: 13px;
+    color: gray;
+    display: inline;
+}
+
+.video {
+    position: relative;
+    top: 1px;
+    width: 230px;
+    height: 357px;
+    border-bottom: 0.5px solid gainsboro;
+    padding: 6px 0 0 7px;
+    background: white;
+}
+
+.videoBlock {
+    margin: 6px 0 0 7px;
+    top: 10px;
+    width: 200px;
+    height: 148px;
+    background: white;
+}
+
+.videoBlock p {
+    position: relative;
+    top: -7px;
+    color: #5181b8;
+}
+
+.videoBlock img {
+    position: relative;
+    width: 200px;
+    height: 112px;
+    border-radius: 5px;
+}
+
+.music {
+    position: relative;
+    background: white;
+    top: 1px;
+    width: 230px;
+    height: 208px;
+    border-bottom: 0.5px solid gainsboro;
+    padding: 7px;
+}
+
+.musicBlock {
+    position: relative;
+    width: 208px;
+    height: 48px;
+    margin: 7px;
+}
+
+.musicBlock img {
+    top: -5px;
+    left: -5px;
+    position: relative;
+    width: 40px;
+    height: 40px;
+    border-radius: 3px;
+}
+
+.musicBlock p {
+    top: -55px;
+    left: 47px;
+    position: relative;
+    color: black;
+    letter-spacing: 0.15px;
+    font-size: 12.3px;
+}
+
+.musicBlock a {
+    top: -63px;
+    left: 47px;
+    position: relative;
+    color: darkgray;
+    text-decoration: none;
+    letter-spacing: 0.15px;
+    font-size: 12.3px;
+}
+
+.friendLine {
+    position: fixed;
+    z-index: 99;
+    width: 52px;
+    height: 350px;
+    right: 0.8%;
+    bottom: 0.05%;
+    border-radius: 3px;
+    background-color: #dae2ea;
+}
+
+.friendLineBlock{
+    position: relative;
+    width: 52px;
+    height: 52px;
+}
+.friendLineBlock img{
+    position: relative;
+    align-content: center;
+    width: 40px;
+    height: 40px;
+    top: 5px;
+    left: 10%;
+    border-radius: 450px;
+}
+.friendLineCount{
+    position: relative;
+    width: 52px;
+    height: 38px;
+}
+.friendLineCount img{
+    width: 9px;
+    height: 11px;
+    top: 10px;
+    left: 30px;
+    position: relative;
+}
+.friendLineCount p{
+    position: relative;
+    top: -17px;
+    left: 12px;
+    color: #7e9ebc;
+    font-weight: bold;
+}
+
