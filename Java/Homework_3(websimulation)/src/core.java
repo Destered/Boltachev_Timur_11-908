@@ -9,8 +9,6 @@ public class core {
             try {
                 System.out.println("Input command:");
                 System.out.println(CommandParsing.parse(br.readLine()));
-
-
             }
             catch (IndexOutOfBoundsException e){
                 CommandParsing.error404();
@@ -21,3 +19,8 @@ public class core {
         }
     }
 }
+    /*
+    Закончить, переделать сообщения, обработку ошибок добавить
+    Добавить возможность добавлять данные
+    Добавить данные
+     */
