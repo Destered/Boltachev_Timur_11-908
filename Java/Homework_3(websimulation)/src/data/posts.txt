@@ -1,0 +1,3 @@
+name;description;author;date;text
+Where I Am?;Post about me;47474747;21.08.2001;Well done. Here are the test results: You are a horrible person. I'm serious, that's what it says: "A horrible person." We weren't even testing for that. Don't let that horrible-person thing discourage you. It's just a data point.
+You little $#%$#;[DATA DELETE];12341423; 01.01.1980;I found a unknown object, it's a [DATA DELETE]. I think i can use it....
