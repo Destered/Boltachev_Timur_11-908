@@ -1,4 +1,4 @@
-Username_send;Username_to;text
+Id_send;Id_to;text
 47474747;14881337;Hey,wake up!
 12341423;14881337;Hello
 14881337;12341423;Hi!

@@ -4,9 +4,9 @@ public class HtmlGenerator {
     String path;
     String name;
 
-    public HtmlGenerator() throws IOException {
-        name = "" + System.currentTimeMillis();
-        path = new File("").getAbsolutePath() + "/Homework_3(websimulation)/src/page/" + name + ".html";
+    public HtmlGenerator(String name) throws IOException {
+        this.name = name + "_" + System.currentTimeMillis();
+        path = new File("").getAbsolutePath() + "/Homework_3(websimulation)/src/page/" + this.name + ".html";
         new File(path).createNewFile();
     }
 
@@ -52,7 +52,7 @@ public class HtmlGenerator {
                 this.addMessage(userFrom, userTo, dataMsg[2]);
             }
             brUsr.close();
-            brUsr = new BufferedReader(new FileReader(user));;
+            brUsr = new BufferedReader(new FileReader(user));
             message = brMsg.readLine();
         }
         brMsg.close();
@@ -71,7 +71,7 @@ public class HtmlGenerator {
                 String[] data = curLine.split(";");
                 if (id.equals(data[2])) {
                     isFind = true;
-                    HtmlGenerator file = new HtmlGenerator();
+                    HtmlGenerator file = new HtmlGenerator("id");
                     file.begin();
                     file.addUser(data);
                     file.finish();
@@ -90,7 +90,7 @@ public class HtmlGenerator {
     }
 
 
-    public void read(String cmd) throws Exception {
+    public void read() throws Exception {
         try {
             File user = new File(new File("").getAbsolutePath() + "/Homework_3(websimulation)/src/data/user.txt");
             BufferedReader br = new BufferedReader(new FileReader(user));
@@ -111,11 +111,11 @@ public class HtmlGenerator {
     }
 
     public static void init(String cmd) throws Exception {
-        HtmlGenerator file = new HtmlGenerator();
+        HtmlGenerator file = new HtmlGenerator(cmd);
         if (cmd.equals("messages")) {
             file.message();
         } else {
-            file.read(cmd);
+            file.read();
         }
     }
 
