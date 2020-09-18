@@ -2,3 +2,6 @@ Username;Age;Id;Country
 Dester;19;14881337;Russia
 AlanWake;27;47474747;USA
 Henry;22;12341423;Ukraine
+Adam;37;20272027;USA
+Sans;??;15092015;USA
+Chara;12;99999999;USA

@@ -2,3 +2,8 @@ Username_send;Username_to;text
 47474747;14881337;Hey,wake up!
 12341423;14881337;Hello
 14881337;12341423;Hi!
+15092015;20272027;Do you know we're not real?
+20272027;15092015;Are you talking about the simulation in which we were created and where are we?
+15092015;20272027;Yep ^^
+99999999;15092015;Hello Sans :3
+15092015;99999999;F@@k, I'm not here!
