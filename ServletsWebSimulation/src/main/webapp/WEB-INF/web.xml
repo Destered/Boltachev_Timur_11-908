@@ -1,0 +1,32 @@
+<web-app xmlns="http://java.sun.com/xml/ns/j2ee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd"
+         version="2.4">
+    <servlet>
+        <servlet-name>ServletFeed</servlet-name>
+        <servlet-class>Servlet.ServletFeed</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ServletFeed</servlet-name>
+        <url-pattern>/feed</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>ServletMessages</servlet-name>
+        <servlet-class>Servlet.ServletMessages</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ServletMessages</servlet-name>
+        <url-pattern>/messages</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>ServletId</servlet-name>
+        <servlet-class>Servlet.ServletId</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ServletId</servlet-name>
+        <url-pattern>/id/*</url-pattern>
+    </servlet-mapping>
+
+</web-app>
