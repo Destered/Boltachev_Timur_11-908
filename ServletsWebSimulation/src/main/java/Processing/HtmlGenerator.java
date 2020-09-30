@@ -46,7 +46,7 @@ public class HtmlGenerator {
         if (!isFind) {
             System.out.println("User not found!");
         }
-        return htmlAction.openHtml("\\page\\" + returnName + ".html");
+        return htmlAction.getHtmlPath("\\page\\" + returnName + ".html");
     }
 
     public static String init(String cmd) {
@@ -114,7 +114,7 @@ public class HtmlGenerator {
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
-        return htmlAction.openHtml("\\page\\" + name + ".html");
+        return htmlAction.getHtmlPath("\\page\\" + name + ".html");
     }
 
     public String read() {
@@ -135,7 +135,7 @@ public class HtmlGenerator {
             System.out.println("IO Exception");
             System.out.println(e.getMessage());
         }
-        return htmlAction.openHtml("\\page\\" + name + ".html");
+        return htmlAction.getHtmlPath("\\page\\" + name + ".html");
     }
 
     private void finish() {
@@ -145,7 +145,7 @@ public class HtmlGenerator {
                     "</body>\n" +
                             "</html>");
             fw.close();
-            htmlAction.openHtml("\\page\\" + name + ".html");
+            htmlAction.getHtmlPath("\\page\\" + name + ".html");
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
