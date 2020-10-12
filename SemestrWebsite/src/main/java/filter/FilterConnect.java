@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.Optional;
 
 @WebFilter(urlPatterns = {"/register", "/login", "/profile"}, filterName = "AuthFilter")
 public class FilterConnect implements Filter {
@@ -29,7 +30,6 @@ public class FilterConnect implements Filter {
         HttpServletResponse response = (HttpServletResponse) servletResponse;
 
         HttpSession session = request.getSession();
-        session.setMaxInactiveInterval(-1);
 
         this.checkCookies(request.getCookies(), session, request, response);
 
@@ -40,10 +40,10 @@ public class FilterConnect implements Filter {
         if (cookies != null) {
             for (Cookie cookie : cookies) {
                 if (cookie.getName().equals("SiteAuthUser")) {
-                    User user = us.findUser(cookie.getValue());
-                    if (user != null) {
+                    Optional<User> user = us.findUserByUsername(cookie.getValue());
+                    if (user.isPresent()) {
                         if (session.getAttribute("user") == null) {
-                            session.setAttribute("user",user);
+                            session.setAttribute("user",user.get());
                         }
                     }
                     break;

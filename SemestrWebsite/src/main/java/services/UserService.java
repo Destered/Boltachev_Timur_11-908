@@ -1,47 +1,49 @@
 package services;
 
 import models.User;
+import repositories.UsersDaoImpl;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.sql.SQLException;
+import java.util.Optional;
+
 
 public class UserService {
-    static List<User> userList = new ArrayList<>();
+    UsersDaoImpl usersDao = new UsersDaoImpl();
 
     public boolean addUser(User user){
-        if(!hasUser(user)){
-            userList.add(user);
+        try {
+            usersDao.save(user);
             return true;
-        }else{
+        }
+        catch (SQLException e){
             return false;
         }
+
     }
 
-    public User findUser(String username){
-        for (User user: userList){
-            if(user.getUsername().equals(username)) return user;
-        }
-        return null;
+    public Optional<User> findUserById(Integer id){
+        return usersDao.find(id);
+
     }
+
+    public Optional<User> findUserByUsername(String username){
+        return usersDao.findByUsername(username);
+
+    }
+
+
 
     public boolean login(User user){
-        boolean alreadyHas = false;
-        for(User userCheck: userList){
-            if(userCheck.getUsername().equals(user.getUsername()) && userCheck.getPassword().equals(user.getPassword())){
-                alreadyHas = true;
-            }
+        Optional<User> checkUser = usersDao.findByUsername(user.getUsername());
+        if(checkUser.isPresent()){
+            User checked = checkUser.get();
+            return checked.getPassword().equals(user.getPassword());
         }
-        return alreadyHas;
+        else return false;
     }
 
     private boolean hasUser(User user){
-        boolean alreadyHas = false;
-        for(User userCheck: userList){
-            if(userCheck.getUsername().equals(user.getUsername()) || userCheck.getEmail().equals(user.getEmail())){
-                alreadyHas = true;
-            }
-        }
-        return alreadyHas;
+        return usersDao.findByUsername(user.getUsername()).isPresent();
     }
 
 }

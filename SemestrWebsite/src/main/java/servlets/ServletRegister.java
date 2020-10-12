@@ -37,8 +37,8 @@ public class ServletRegister extends HttpServlet {
             User registerUser = new User(username, password, email);
             if (us.addUser(registerUser)) {
                 HttpSession session = req.getSession();
-                session.setAttribute("user",registerUser);
-                session.setMaxInactiveInterval(-1);
+                session.setAttribute("user",us.findUserByUsername(registerUser.getUsername()).get());
+                session.setMaxInactiveInterval(20);
                 resp.sendRedirect("/profile");
             } else {
                 resp.sendRedirect("/register");

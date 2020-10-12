@@ -42,7 +42,8 @@ public class ServletLogin extends HttpServlet {
                     userCookie.setMaxAge(-1);
                     resp.addCookie(userCookie);
                 }
-                session.setAttribute("user",us.findUser(loginUser.getUsername()));
+                session.setAttribute("user",us.findUserByUsername(loginUser.getUsername()).get());
+                session.setMaxInactiveInterval(20);
                 resp.sendRedirect("/profile");
             }else{
                 resp.sendRedirect("/login");

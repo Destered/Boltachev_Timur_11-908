@@ -15,7 +15,7 @@ public class ServletProfile extends HttpServlet {
     Helper helper = new Helper();
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession();
-        User user = (User)session.getAttribute("user");
+        User user = (User) session.getAttribute("user");
         if(user != null){
             Map<String, Object> root = new HashMap<>();
             root.put("username",user.getUsername());

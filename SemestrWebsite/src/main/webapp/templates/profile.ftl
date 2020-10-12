@@ -13,8 +13,5 @@ Email:${email}
 <form action="profile" method="post">
     <input type="submit" value="Выйти">
 </form>
-
-
-
 </body>
 </html>
