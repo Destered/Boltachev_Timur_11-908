@@ -72,7 +72,9 @@ public class UsersDaoImpl implements UsersDao {
         return Optional.ofNullable(user);
     }
 
+
     private final String SQL_FIND_ONE_BY_USERNAME = "SELECT * FROM users where username = ?";
+    @Override
     public Optional<User> findByUsername(String username) {
         User user = null;
         if (username.isEmpty()) return Optional.empty();
