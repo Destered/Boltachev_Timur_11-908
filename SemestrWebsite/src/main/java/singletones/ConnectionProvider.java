@@ -9,17 +9,22 @@ public class ConnectionProvider {
     private static final String password = "FiveSeven57?!";
     private static final String url = "jdbc:postgresql://localhost:5432/website_db";
     private static final String driverClassName = "org.postgresql.Driver";
+    private static Connection instance;
 
-    private ConnectionProvider() throws ClassNotFoundException{
+    private ConnectionProvider(){
     }
 
-    public static Connection getConnection(){
-        try {
+    public static Connection getConnection() throws ClassNotFoundException{
+        if(instance == null){
             Class.forName(driverClassName);
-            return DriverManager.getConnection(url, userName, password);
-        } catch (SQLException | ClassNotFoundException e) {
-            throw new IllegalStateException(e);
+            try {
+                instance = DriverManager.getConnection(url, userName, password);
+            } catch (SQLException e) {
+                System.out.println(e.getMessage());
+            }
         }
+            return instance;
+
     }
 
 }

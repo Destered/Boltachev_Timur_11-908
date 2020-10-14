@@ -7,7 +7,7 @@ import java.sql.SQLException;
 import java.util.Optional;
 
 
-public class UserService {
+public class UserService{
     UsersDaoImpl usersDao = new UsersDaoImpl();
 
     public boolean addUser(User user){

@@ -6,6 +6,6 @@ import java.util.Optional;
 
 public interface UsersDao extends CrudDao<User,Integer> {
 
-    Optional<?> findByUsername(String username);
+    Optional<User> findByUsername(String username);
 
 }

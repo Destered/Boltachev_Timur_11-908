@@ -12,8 +12,12 @@ public class UsersDaoImpl implements UsersDao {
 
 
    public UsersDaoImpl(){
-        this.connection = ConnectionProvider.getConnection();
-    }
+       try {
+           this.connection = ConnectionProvider.getConnection();
+       } catch (ClassNotFoundException e) {
+           System.out.println("ClassNotFoundException");
+       }
+   }
 
     private final String SQL_SAVE_USER_TO_TABLE = "INSERT into users(username, email, password) values (?,?,?)";
     @Override
