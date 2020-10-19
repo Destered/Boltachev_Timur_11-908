@@ -33,11 +33,11 @@ public class UserService{
 
 
 
-    public boolean login(User user){
-        Optional<User> checkUser = usersDao.findByUsername(user.getUsername());
+    public boolean login(String username,String password){
+        Optional<User> checkUser = usersDao.findByUsername(username);
         if(checkUser.isPresent()){
             User checked = checkUser.get();
-            return checked.getPassword().equals(user.getPassword());
+            return checked.getPassword().equals(password);
         }
         else return false;
     }

@@ -1,6 +1,7 @@
 package servlets;
 
 import models.User;
+import services.Helper;
 import services.UserService;
 
 import javax.servlet.RequestDispatcher;
@@ -8,15 +9,24 @@ import javax.servlet.ServletException;
 import javax.servlet.http.*;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.HashMap;
+import java.util.Map;
 
 public class ServletLogin extends HttpServlet {
+    Helper helper = new Helper();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        resp.setContentType("text/html;charset=UTF-8");
+        resp.setCharacterEncoding("UTF-8");
         HttpSession session = req.getSession();
         User user = (User)session.getAttribute("user");
         if(user != null) resp.sendRedirect("/profile");
-        else req.getRequestDispatcher("/html/login.html").include(req,resp);
+        else {
+                Map<String, Object> root = new HashMap<>();
+                root.put("isLogged",false);
+                helper.render(req,resp,"login.ftl",root);
+        }
     }
 
     @Override
@@ -35,15 +45,13 @@ public class ServletLogin extends HttpServlet {
             rd.include(req, resp);
             writer.write("Has empty field!");
         }else{
-            User loginUser = new User(username,password);
-            if(us.login(loginUser)){
+            if(us.login(username,password)){
                 if(rememberMe != null){
                     Cookie userCookie = new Cookie("SiteAuthUser",username);
                     userCookie.setMaxAge(-1);
                     resp.addCookie(userCookie);
                 }
-                session.setAttribute("user",us.findUserByUsername(loginUser.getUsername()).get());
-                session.setMaxInactiveInterval(20);
+                session.setAttribute("user",us.findUserByUsername(username).get());
                 resp.sendRedirect("/profile");
             }else{
                 resp.sendRedirect("/login");

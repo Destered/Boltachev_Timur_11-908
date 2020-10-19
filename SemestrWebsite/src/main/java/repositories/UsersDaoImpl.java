@@ -4,6 +4,7 @@ import models.User;
 import singletones.ConnectionProvider;
 
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -19,19 +20,22 @@ public class UsersDaoImpl implements UsersDao {
        }
    }
 
-    private final String SQL_SAVE_USER_TO_TABLE = "INSERT into users(username, email, password) values (?,?,?)";
+    private final String SQL_SAVE_USER_TO_TABLE = "INSERT into users(username, email, password,firstName,secondName,about) values (?,?,?,?,?,?)";
     @Override
     public void save(User model)throws SQLException {
         try(PreparedStatement preparedStatement = connection.prepareStatement(SQL_SAVE_USER_TO_TABLE, Statement.RETURN_GENERATED_KEYS)){
             preparedStatement.setString(1,model.getUsername());
             preparedStatement.setString(2,model.getEmail());
             preparedStatement.setString(3,model.getPassword());
+            preparedStatement.setString(4,model.getFirstName());
+            preparedStatement.setString(5,model.getSecondName());
+            preparedStatement.setString(6,null);
             int updateRow = preparedStatement.executeUpdate();
             if(updateRow == 0){
                 throw new SQLException();
             }
             try (ResultSet set = preparedStatement.getGeneratedKeys();) {
-                //Если id  существет,обновляем его у подели.
+                //Если id  существет,обновляем его у модели.
                 if (set.next()) {
                     model.setId(set.getInt(1));
                 } else {
@@ -96,9 +100,33 @@ public class UsersDaoImpl implements UsersDao {
         return Optional.ofNullable(user);
     }
 
+    private final String SQL_UPDATE_USER_ABOUT = "UPDATE users SET about=? WHERE user_id=?";
+    @Override
+    public boolean updateUserAbout(String about,int user_id) {
+        try(PreparedStatement preparedStatement = connection.prepareStatement(SQL_UPDATE_USER_ABOUT)){
+            preparedStatement.setString(1,about);
+            preparedStatement.setInt(2,user_id);
+            preparedStatement.execute();
+        }catch (SQLException e){
+            throw new IllegalStateException(e);
+        }
+        return true;
+    }
+
+    private final String SQL_FIND_ALL_USERS = "SELECT * FROM users";
     @Override
     public List<User> findAll() {
-        return null;
+        List<User> users = new ArrayList<>();
+        try(Statement statement = connection.createStatement()){
+            statement.execute(SQL_FIND_ALL_USERS);
+            ResultSet rs = statement.getResultSet();
+            while(rs.next()){
+                users.add(userRowMapper.mapRow(rs));
+            }
+        }catch (SQLException e){
+            throw new IllegalStateException(e);
+        }
+        return users;
     }
 
 
@@ -107,7 +135,10 @@ public class UsersDaoImpl implements UsersDao {
         String username = row.getString("username");
         String email = row.getString("email");
         String password = row.getString("password");
-        return new User(username,password,email,id);
+        String firstName = row.getString("firstName");
+        String secondName = row.getString("secondName");
+        String about = row.getString("about");
+        return new User(username,password,email,id,firstName,secondName,about);
     };
 
 }

@@ -15,11 +15,17 @@ public class ServletProfile extends HttpServlet {
     Helper helper = new Helper();
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession();
+        resp.setContentType("text/html;charset=UTF-8");
+        resp.setCharacterEncoding("UTF-8");
         User user = (User) session.getAttribute("user");
         if(user != null){
             Map<String, Object> root = new HashMap<>();
             root.put("username",user.getUsername());
             root.put("email",user.getEmail());
+            root.put("firstName",user.getFirstName());
+            root.put("secondName",user.getSecondName());
+            root.put("about",user.getAbout());
+            root.put("isLogged",true);
             helper.render(req,resp,"profile.ftl",root);
         }else resp.sendRedirect("/login");
     }

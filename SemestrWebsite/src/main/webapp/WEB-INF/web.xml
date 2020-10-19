@@ -31,4 +31,15 @@
         <url-pattern>/profile</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>ServletMain</servlet-name>
+        <servlet-class>servlets.ServletMain</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>ServletMain</servlet-name>
+        <url-pattern>/main</url-pattern>
+    </servlet-mapping>
+
+
 </web-app>
