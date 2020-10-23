@@ -41,5 +41,55 @@
         <url-pattern>/main</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>ServletNews</servlet-name>
+        <servlet-class>servlets.ServletNews</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ServletNews</servlet-name>
+        <url-pattern>/news</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>ServletHelp</servlet-name>
+        <servlet-class>servlets.ServletHelp</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ServletHelp</servlet-name>
+        <url-pattern>/help</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>ServletUsers</servlet-name>
+        <servlet-class>servlets.ServletUsers</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ServletUsers</servlet-name>
+        <url-pattern>/users</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>ServletPost</servlet-name>
+        <servlet-class>servlets.ServletPosts</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ServletPost</servlet-name>
+        <url-pattern>/post</url-pattern>
+    </servlet-mapping>
 
+    <servlet>
+        <servlet-name>ServletPostCreate</servlet-name>
+        <servlet-class>servlets.ServletPostCreate</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ServletPostCreate</servlet-name>
+        <url-pattern>/post/create</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>ServletAboutUser</servlet-name>
+        <servlet-class>servlets.ServletPostCreate</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ServletAboutUser</servlet-name>
+        <url-pattern>/profile/aboutUser</url-pattern>
+    </servlet-mapping>
 </web-app>

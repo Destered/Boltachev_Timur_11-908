@@ -12,7 +12,8 @@
         <br>
         ${about}
     <#else >
-
+    <br>
+        <a name="aboutMe" href="aboutUser.ftl">
 
     </#if>
         <input type="submit" value="Выйти">

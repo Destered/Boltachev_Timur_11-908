@@ -1,5 +1,5 @@
 <#ftl encoding="utf-8">
-<#macro standardPage title="">
+<#macro standardPage title="GEO">
     <!DOCTYPE html>
     <html lang="en">
     <head>
