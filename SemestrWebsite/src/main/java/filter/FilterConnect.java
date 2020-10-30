@@ -12,7 +12,7 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.Optional;
 
-@WebFilter(urlPatterns = {"/register", "/login", "/profile"}, filterName = "AuthFilter")
+@WebFilter(urlPatterns = {"/register", "/login", "/profile","/main","/news"}, filterName = "AuthFilter")
 public class FilterConnect implements Filter {
     UserService us = new UserService();
     private FilterConfig config = null;

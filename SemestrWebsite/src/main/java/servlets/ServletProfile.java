@@ -20,12 +20,14 @@ public class ServletProfile extends HttpServlet {
         User user = (User) session.getAttribute("user");
         if(user != null){
             Map<String, Object> root = new HashMap<>();
-            root.put("username",user.getUsername());
             root.put("email",user.getEmail());
-            root.put("firstName",user.getFirstName());
-            root.put("secondName",user.getSecondName());
+            root.put("firstname",user.getFirstName());
+            root.put("secondname",user.getSecondName());
+            root.put("username",user.getUsername());
+            root.put("imagepath",user.getImagePath());
             root.put("about",user.getAbout());
             root.put("isLogged",true);
+            root.put("pageOverlord",true);
             helper.render(req,resp,"profile.ftl",root);
         }else resp.sendRedirect("/login");
     }

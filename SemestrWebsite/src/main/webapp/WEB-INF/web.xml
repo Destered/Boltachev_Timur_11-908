@@ -85,11 +85,45 @@
         <url-pattern>/post/create</url-pattern>
     </servlet-mapping>
     <servlet>
-        <servlet-name>ServletAboutUser</servlet-name>
-        <servlet-class>servlets.ServletPostCreate</servlet-class>
+        <servlet-name>ServletEditUser</servlet-name>
+        <servlet-class>servlets.ServletEditUser</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>ServletAboutUser</servlet-name>
-        <url-pattern>/profile/aboutUser</url-pattern>
+        <servlet-name>ServletEditUser</servlet-name>
+        <url-pattern>/editUser</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>ServletUploadPhoto</servlet-name>
+        <servlet-class>servlets.ServletPhotoUpload</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ServletUploadPhoto</servlet-name>
+        <url-pattern>/uploadPhoto</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>ServletGetNews</servlet-name>
+        <servlet-class>servlets.ServletGetNews</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ServletGetNews</servlet-name>
+        <url-pattern>/getnews</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>ServletChat</servlet-name>
+        <servlet-class>servlets.ServletChat</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ServletChat</servlet-name>
+        <url-pattern>/chat</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>ServletChatData</servlet-name>
+        <servlet-class>servlets.ServletChatData</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ServletChatData</servlet-name>
+        <url-pattern>/chatdata</url-pattern>
     </servlet-mapping>
 </web-app>

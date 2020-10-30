@@ -6,7 +6,7 @@
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="/templates/test.js"></script>
-    <form action="login" method="POST">
+    <form action="login" method="POST" name="authWindow">
         <label>
             <p class="label-txt">ENTER YOUR USERNAME</p>
             <input name="username" type="text" class="input">

@@ -21,14 +21,6 @@
         <div class="row mt-3 dark-grey-text">
 
             <!-- Grid column -->
-            <div class="col-md-3 col-lg-4 col-xl-3 mb-4">
-
-                <!-- Content -->
-                <h6 class="text-uppercase font-weight-bold">GEO Society</h6>
-                <hr class="teal accent-3 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
-                <p>Input text about site</p>
-
-            </div>
             <!-- Grid column -->
 
             <!-- Grid column -->
@@ -38,16 +30,16 @@
                 <h6 class="text-uppercase font-weight-bold">Our Investors</h6>
                 <hr class="teal accent-3 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
                 <p>
-                    <a class="dark-grey-text" href="#!">Google</a>
+                    <a class="dark-grey-text" href="https://www.google.com">Google</a>
                 </p>
                 <p>
-                    <a class="dark-grey-text" href="#!">Facebook</a>
+                    <a class="dark-grey-text" href="https://www.facebook.com">Facebook</a>
                 </p>
                 <p>
-                    <a class="dark-grey-text" href="#!">Yandex</a>
+                    <a class="dark-grey-text" href="https://www.yandex.ru">Yandex</a>
                 </p>
                 <p>
-                    <a class="dark-grey-text" href="#!">UK Government</a>
+                    <a class="dark-grey-text" href="https://www.uz.gov.ua">UKR Government</a>
                 </p>
 
             </div>
@@ -66,7 +58,7 @@
                     <a class="dark-grey-text" href="/register">Become a part of our society</a>
                 </p>
                 <p>
-                    <a class="dark-grey-text" href="/about">About</a>
+                    <a class="dark-grey-text" href="/chat">Online Chat</a>
                 </p>
                 <p>
                     <a class="dark-grey-text" href="/help">Help</a>
@@ -101,7 +93,7 @@
 
     <!-- Copyright -->
     <div class="footer-copyright text-center text-black-50 py-3">© 2020 Copyright:
-        <a class="dark-grey-text" href="https://mdbootstrap.com/"> GEOSociety</a>
+        <a class="dark-grey-text"> GEOSociety</a>
     </div>
     <!-- Copyright -->
 

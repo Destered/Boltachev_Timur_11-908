@@ -1,6 +1,7 @@
 package servlets;
 
 import models.User;
+import org.mindrot.jbcrypt.BCrypt;
 import services.Helper;
 import services.UserService;
 
@@ -37,14 +38,14 @@ public class ServletRegister extends HttpServlet {
         resp.setCharacterEncoding("UTF-8");
         PrintWriter writer = resp.getWriter();
         String username = req.getParameter("username");
-        String password = req.getParameter("password");
+        String password = BCrypt.hashpw(req.getParameter("password"),BCrypt.gensalt());
         String email = req.getParameter("email");
         String firstName = req.getParameter("firstName");
         String secondName = req.getParameter("secondName");
         if(username.isEmpty() || password.isEmpty() || email.isEmpty() || firstName.isEmpty() || secondName.isEmpty()){
-            RequestDispatcher rd = req.getRequestDispatcher("/html/register.html");
-            rd.include(req, resp);
-            writer.write("Has empty field!");
+            Map<String, Object> root = new HashMap<>();
+            root.put("isLogged",false);
+            helper.render(req,resp,"register.ftl",root);
         }else {
             User registerUser = new User(username, password, email,firstName,secondName,null);
             if (us.addUser(registerUser)) {

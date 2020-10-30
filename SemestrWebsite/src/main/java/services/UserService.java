@@ -1,6 +1,7 @@
 package services;
 
 import models.User;
+import org.mindrot.jbcrypt.BCrypt;
 import repositories.UsersDaoImpl;
 
 import java.sql.SQLException;
@@ -37,7 +38,7 @@ public class UserService{
         Optional<User> checkUser = usersDao.findByUsername(username);
         if(checkUser.isPresent()){
             User checked = checkUser.get();
-            return checked.getPassword().equals(password);
+            return BCrypt.checkpw(password,checked.getPassword());
         }
         else return false;
     }

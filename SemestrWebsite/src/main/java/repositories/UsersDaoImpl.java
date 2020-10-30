@@ -46,9 +46,19 @@ public class UsersDaoImpl implements UsersDao {
 
     }
 
-    private final String SQL_UPDATE_USER = "UPDATE users";
+    private final String SQL_UPDATE_USER = "UPDATE users SET firstname=?,secondname=?,about=?,imagepath=? where id_user =?";
     @Override
     public void update(User model) {
+        try(PreparedStatement preparedStatement = connection.prepareStatement(SQL_UPDATE_USER)){
+            preparedStatement.setString(1,model.getFirstName());
+            preparedStatement.setString(2,model.getSecondName());
+            preparedStatement.setString(3,model.getAbout());
+            preparedStatement.setString(4,model.getImagePath());
+            preparedStatement.setInt(5,model.getId());
+            preparedStatement.execute();
+        }catch (SQLException e){
+            throw new IllegalStateException(e);
+        }
     }
 
     private final String SQL_DELETE_USER = "DELETE FROM users WHERE id_user = ?";
@@ -56,6 +66,7 @@ public class UsersDaoImpl implements UsersDao {
     public void delete(Integer id) {
         try(PreparedStatement preparedStatement = connection.prepareStatement(SQL_DELETE_USER)){
             preparedStatement.setInt(1,id);
+            preparedStatement.execute();
         }catch (SQLException e){
             throw new IllegalStateException(e);
         }
@@ -132,13 +143,16 @@ public class UsersDaoImpl implements UsersDao {
 
     private RowMapper<User> userRowMapper = row -> {
         Integer id = row.getInt("id_user");
-        String username = row.getString("username");
-        String email = row.getString("email");
-        String password = row.getString("password");
-        String firstName = row.getString("firstName");
-        String secondName = row.getString("secondName");
-        String about = row.getString("about");
-        return new User(username,password,email,id,firstName,secondName,about);
+        User user = new User();
+        user.setUsername(row.getString("username"));
+        user.setEmail(row.getString("email"));
+        user.setPassword(row.getString("password"));
+        user.setFirstName(row.getString("firstName"));
+        user.setSecondName(row.getString("secondName"));
+        user.setAbout(row.getString("about"));
+        user.setImagePath(row.getString("imagepath"));
+        user.setId(row.getInt("id_user"));
+        return user;
     };
 
 }

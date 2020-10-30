@@ -10,7 +10,17 @@ public class User implements Serializable {
     private Integer id;
     private String firstName;
     private String secondName;
+
+    public String getImagePath() {
+        return imagePath;
+    }
+
+    public void setImagePath(String imagePath) {
+        this.imagePath = imagePath;
+    }
+
     private String about;
+    private String imagePath;
 
     public Integer getId() {
         return id;
@@ -19,6 +29,8 @@ public class User implements Serializable {
     public void setId(Integer id) {
         this.id = id;
     }
+
+    public User(){}
 
     public User(String username, String password, String email, Integer id) {
         this.username = username;
@@ -113,4 +125,6 @@ public class User implements Serializable {
     public void setPassword(String password) {
         this.password = password;
     }
+
+
 }

@@ -13,13 +13,16 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item active ">
-                        <a name="element" class="nav-link font-italic" href="/main"> Main <span class="sr-only">(current)</span></a>
+                        <a name="element" class="nav-link font-italic" href="/profile"> Profile <span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item active ">
-                        <a name="element" class="nav-link font-italic" href="/profile"> Profile <span class="sr-only">(current)</span></a>
+                        <a name="element" class="nav-link font-italic" href="/main"> Main <span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item active">
                         <a name="element" class="nav-link font-italic" href="/news">News <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item active">
+                        <a name="element" class="nav-link font-italic" href="/chat">Chat <span class="sr-only">(current)</span></a>
                     </li>
                 </ul>
             </div>

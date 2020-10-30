@@ -2,6 +2,7 @@ a[name="element"] {
     position: relative;
     cursor: pointer;
     line-height: 1;
+    color: #189228;
     text-decoration: none;
 
 }
@@ -10,6 +11,7 @@ a[name="element"]:after {
     position: absolute;
     left: 0;
     width: 0;
+    background: #189228;
     height: 2px;
     content: "";
     transition: width 0.3s ease-out;
@@ -27,14 +29,14 @@ a[name="element"]:focus:after {
 
 
 body {
-    background: #C5E1A5;
+    background-color: #C5E1A5 !important;
 }
-form {
+form[name="authWindow"] {
     width: 60%;
     margin: 60px auto;
-    background: #efefef;
     padding: 60px 120px 80px 120px;
     text-align: center;
+    background-color: white;
     -webkit-box-shadow: 2px 2px 3px rgba(0,0,0,0.1);
     box-shadow: 2px 2px 3px rgba(0,0,0,0.1);
 }
@@ -104,3 +106,117 @@ button:hover {
     background: #8BC34A;
     color: #ffffff;
 }
+
+.inputPhotoSize{
+    width: 100px;
+    height: 50px;
+}
+
+.noPadding{
+    padding: 0 0 0 0;
+}
+
+.inputPhotoBtn{
+
+}
+
+.profilePage{
+    position: relative;
+    background: #abcb94;
+    margin: 20px 60px 20px 60px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    box-shadow: 2px 2px 3px rgba(0,0,0,0.1);
+}
+.btnPadding{
+    margin-left: 40px;
+    position: relative;
+}
+
+.editPage{
+    position: relative;
+    background: #abcb94;
+    margin: 20px 60px 20px 60px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    box-shadow: 2px 2px 3px rgba(0,0,0,0.1);
+}
+
+.mainBlock{
+    position: relative;
+    background: #abcb94;
+    margin: 20px 60px 20px 60px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    box-shadow: 2px 2px 3px rgba(0,0,0,0.1);
+}
+
+.listSize{
+    width: 40%;
+    margin-left: 30%;
+    margin-bottom: 20px;
+    box-shadow: 2px 2px 3px rgba(0,0,0,0.1);
+}
+.chat {
+    border:1px solid #333;
+    margin: 15px 15px 15px 10%;
+    width:60%;
+    height:70%;
+    background:#555;
+    color:#fff;
+}
+
+.chat-messages {
+    min-height:93%;
+    max-height:93%;
+    overflow:auto;
+}
+
+.chat-messages__content {
+    padding:1px;
+}
+
+.chat__message {
+    border-left:3px solid #333;
+    margin-top:2px;
+    padding:2px;
+}
+
+.chat__message_black {
+    border-color:#000;
+}
+
+.chat__message_blue {
+    border-color:blue;
+}
+
+.chat__message_green {
+    border-color:green;
+}
+
+.chat__message_red {
+    border-color:red;
+}
+
+.chat-input {
+    min-height:6%;
+}
+
+.chat-form__input {
+    width:79%;
+    font-family:arial;
+    font-size:16px;
+    vertical-align:middle;
+    background:#333;
+    color:#fff;
+    border:0;
+    display:inline-block;
+    margin:1px;
+    height:30px;
+}
+
+.chatBtnPadding{
+    margin: 0 0 0 15px;
+    height: 30px;
+}
+
