@@ -16,6 +16,8 @@ import java.util.List;
 public class ServletChatData extends HttpServlet {
     Helper helper = new Helper();
     Chat chatStorage = new Chat();
+    String alertScript="<script> alert('Введите валидную почту!')</script>";
+    String msgCheck="(%%%\\*%%%)|(###\\*###)";
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html;charset=UTF-8");
@@ -32,7 +34,11 @@ public class ServletChatData extends HttpServlet {
             HttpSession session = req.getSession();
             User user = (User)session.getAttribute("user");
             String text = req.getParameter("message");
-            chatStorage.addMessage(text,user.getUsername());
+            if(!text.matches(msgCheck)) {
+                chatStorage.addMessage(text, user.getUsername());
+            } else{
+                resp.getWriter().println("1");
+            }
         }
     }
 

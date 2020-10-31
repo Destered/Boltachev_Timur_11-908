@@ -5,6 +5,7 @@ import org.mindrot.jbcrypt.BCrypt;
 import repositories.UsersDaoImpl;
 
 import java.sql.SQLException;
+import java.util.List;
 import java.util.Optional;
 
 
@@ -24,14 +25,18 @@ public class UserService{
 
     public Optional<User> findUserById(Integer id){
         return usersDao.find(id);
-
     }
+
+
 
     public Optional<User> findUserByUsername(String username){
         return usersDao.findByUsername(username);
 
     }
 
+    public List<User> getAllUsersLikeString(String like){
+        return usersDao.getAllUsersLikeString(like);
+    }
 
 
     public boolean login(String username,String password){

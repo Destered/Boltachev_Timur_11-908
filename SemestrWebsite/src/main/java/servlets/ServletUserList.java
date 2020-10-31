@@ -11,7 +11,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-public class ServletUsers extends HttpServlet {
+public class ServletUserList extends HttpServlet {
     Helper helper = new Helper();
 
     @Override
@@ -22,11 +22,11 @@ public class ServletUsers extends HttpServlet {
         if(session.getAttribute("user") != null){
             Map<String, Object> root = new HashMap<>();
             root.put("isLogged",true);
-            helper.render(req,resp,"users.ftl",root);
+            helper.render(req,resp,"userList.ftl",root);
         }else{
             Map<String, Object> root = new HashMap<>();
             root.put("isLogged",false);
-            helper.render(req,resp,"users.ftl",root);
+            helper.render(req,resp,"userList.ftl",root);
         }
     }
 

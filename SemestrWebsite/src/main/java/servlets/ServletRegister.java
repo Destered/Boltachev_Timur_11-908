@@ -17,7 +17,8 @@ import java.util.Map;
 public class ServletRegister extends HttpServlet {
     UserService us = new UserService();
     Helper helper = new Helper();
-
+    String checkEmail= "/^((([0-9A-Za-z]{1}[-0-9A-z\\.]{1,}[0-9A-Za-z]{1})|([0-9А-Яа-я]{1}[-0-9А-я\\.]{1,}[0-9А-Яа-я]{1}))@([-A-Za-z]{1,}\\.){1,2}[-A-Za-z]{2,})$/u";
+    String alertScript="<script> alert('Введите валидную почту!')</script>";
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html;charset=UTF-8");
@@ -46,6 +47,11 @@ public class ServletRegister extends HttpServlet {
             Map<String, Object> root = new HashMap<>();
             root.put("isLogged",false);
             helper.render(req,resp,"register.ftl",root);
+        }else if(!email.matches(checkEmail)){
+            Map<String, Object> root = new HashMap<>();
+            root.put("isLogged",false);
+            helper.render(req,resp,"register.ftl",root);
+            writer.write(alertScript);
         }else {
             User registerUser = new User(username, password, email,firstName,secondName,null);
             if (us.addUser(registerUser)) {

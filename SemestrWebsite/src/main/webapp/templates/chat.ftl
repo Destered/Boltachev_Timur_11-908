@@ -63,6 +63,11 @@
                     type: "GET",
                     data: {message: messageText, method: 'sendMsg'},
                     async: false,
+                    success : function(data) {
+                        if(data.toString().charAt(0) === "1"){
+                            alert("Input Correct Message")
+                        }
+                    }
                 })
                 message.value = "";
                 getMsg();

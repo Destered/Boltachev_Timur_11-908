@@ -155,4 +155,20 @@ public class UsersDaoImpl implements UsersDao {
         return user;
     };
 
+    private final String SQL_FIND_ALL_USERS_LIKE="select * from users where username like ?";
+    public List<User> getAllUsersLikeString(String like) {
+    like += '%';
+    List<User> users = new ArrayList<>();
+    try(PreparedStatement preparedStatement = connection.prepareStatement(SQL_FIND_ALL_USERS_LIKE)){
+        preparedStatement.setString(1,like);
+        preparedStatement.execute();
+        ResultSet rs = preparedStatement.getResultSet();
+        while(rs.next()){
+            users.add(userRowMapper.mapRow(rs));
+        }
+    } catch (SQLException throwables) {
+        throwables.printStackTrace();
+    }
+    return users;
+    }
 }

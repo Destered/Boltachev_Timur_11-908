@@ -60,7 +60,7 @@
     </servlet-mapping>
     <servlet>
         <servlet-name>ServletUsers</servlet-name>
-        <servlet-class>servlets.ServletUsers</servlet-class>
+        <servlet-class>servlets.ServletUserList</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>ServletUsers</servlet-name>
