@@ -7,7 +7,7 @@ public class Post implements Serializable {
     private String text;
     private String photo;
     private int post_id;
-    private int user_id;
+    private int author_id;
 
     @Override
     public String toString() {
@@ -15,12 +15,12 @@ public class Post implements Serializable {
     }
     public Post(){}
 
-    public int getUser_id() {
-        return user_id;
+    public int getAuthor_id() {
+        return author_id;
     }
 
-    public void setUser_id(int user_id) {
-        this.user_id = user_id;
+    public void setAuthor_id(int author_id) {
+        this.author_id = author_id;
     }
 
     public Post(String title, String text, String photo, int post_id, int user_id) {
@@ -28,7 +28,7 @@ public class Post implements Serializable {
         this.text = text;
         this.photo = photo;
         this.post_id = post_id;
-        this.user_id = user_id;
+        this.author_id = user_id;
     }
 
     public Post(String title, String text, String photo, int post_id) {

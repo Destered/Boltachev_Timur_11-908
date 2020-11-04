@@ -19,13 +19,14 @@ public class PostDaoImpl implements PostDao {
         }
     }
 
-    final static String SQL_SAVE_POST="INSERT into posts(title, text, photo) values (?,?,?)";
+    final static String SQL_SAVE_POST="INSERT into posts(title, text, photo,author_id) values (?,?,?,?)";
     @Override
     public void save(Post model) throws SQLException {
         try(PreparedStatement preparedStatement = connection.prepareStatement(SQL_SAVE_POST, Statement.RETURN_GENERATED_KEYS)){
             preparedStatement.setString(1,model.getTitle());
             preparedStatement.setString(2,model.getText());
             preparedStatement.setString(3,model.getPhoto());
+            preparedStatement.setInt(4,model.getAuthor_id());
             int updateRow = preparedStatement.executeUpdate();
             if(updateRow == 0){
                 throw new SQLException();
@@ -101,7 +102,7 @@ public class PostDaoImpl implements PostDao {
         post.setPhoto(row.getString("photo"));
         post.setText(row.getString("text"));
         post.setTitle(row.getString("title"));
-        post.setUser_id(row.getInt("author_id"));
+        post.setAuthor_id(row.getInt("author_id"));
         return post;
     };
 }

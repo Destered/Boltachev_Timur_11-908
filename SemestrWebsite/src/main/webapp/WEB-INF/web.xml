@@ -58,14 +58,7 @@
         <servlet-name>ServletHelp</servlet-name>
         <url-pattern>/help</url-pattern>
     </servlet-mapping>
-    <servlet>
-        <servlet-name>ServletUsers</servlet-name>
-        <servlet-class>servlets.ServletUserList</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>ServletUsers</servlet-name>
-        <url-pattern>/users</url-pattern>
-    </servlet-mapping>
+
     
     <servlet>
         <servlet-name>ServletPost</servlet-name>

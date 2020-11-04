@@ -3,7 +3,6 @@ package servlets;
 import models.User;
 import repositories.UsersDao;
 import repositories.UsersDaoImpl;
-import services.FileSaver;
 import services.FileSaverImpl;
 import services.Helper;
 
@@ -13,7 +12,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 import java.io.File;
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.Optional;
 
         @WebServlet("/saveImage")
@@ -30,6 +28,9 @@ import java.util.Optional;
 
             @Override
             protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+                resp.setContentType("text/html;charset=UTF-8");
+                resp.setCharacterEncoding("UTF-8");
+                req.setCharacterEncoding("UTF-8");
                 HttpSession session = req.getSession();
                 User userSession = (User)session.getAttribute("user");
                 Part photoPart = req.getPart("photo");

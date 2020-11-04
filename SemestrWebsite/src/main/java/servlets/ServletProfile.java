@@ -17,6 +17,7 @@ public class ServletProfile extends HttpServlet {
         HttpSession session = req.getSession();
         resp.setContentType("text/html;charset=UTF-8");
         resp.setCharacterEncoding("UTF-8");
+        req.setCharacterEncoding("UTF-8");
         User user = (User) session.getAttribute("user");
         if(user != null){
             Map<String, Object> root = new HashMap<>();
@@ -35,6 +36,7 @@ public class ServletProfile extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html;charset=UTF-8");
         resp.setCharacterEncoding("UTF-8");
+        req.setCharacterEncoding("UTF-8");
         HttpSession session = req.getSession();
         session.invalidate();
         Cookie userCookie = new Cookie("SiteAuthUser",null);

@@ -22,6 +22,7 @@ public class ServletChatData extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html;charset=UTF-8");
         resp.setCharacterEncoding("UTF-8");
+        req.setCharacterEncoding("UTF-8");
         String method = req.getParameter("method");
         if(method.equals("getMsg")) {
             List<Message> messageList = chatStorage.getNewMessage();

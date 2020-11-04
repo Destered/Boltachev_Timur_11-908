@@ -36,18 +36,19 @@ public class ServletEditUser extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html;charset=UTF-8");
+        req.setCharacterEncoding("UTF-8");
         HttpSession session = req.getSession();
         User user = (User)session.getAttribute("user");
         String firstName = req.getParameter("firstname");
         String secondName = req.getParameter("secondname");
         String about = req.getParameter("about");
-        if(firstName != null){
+        if(!firstName.isEmpty()){
             user.setFirstName(firstName);
         }
-        if(secondName != null){
+        if(!secondName.isEmpty()){
             user.setSecondName(secondName);
         }
-        if(about != null){
+        if(!about.isEmpty()){
             user.setAbout(about);
         }
         usersDao.update(user);

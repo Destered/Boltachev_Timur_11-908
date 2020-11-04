@@ -5,7 +5,7 @@
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="/templates/test.js"></script>
-    <form action="register" method="POST" name="authWindow">
+    <form action="register" method="POST" name="authWindow" autocomplete="off">
         <label>
             <p class="label-txt text-center">FIRST NAME</p>
             <input name="firstName" type="text" class="input">

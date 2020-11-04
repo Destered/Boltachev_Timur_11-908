@@ -18,7 +18,9 @@ public class ServletPosts extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html;charset=UTF-8");
         resp.setCharacterEncoding("UTF-8");
+        req.setCharacterEncoding("UTF-8");
         HttpSession session = req.getSession();
+
         if(session.getAttribute("user") != null){
             Map<String, Object> root = new HashMap<>();
             root.put("isLogged",true);
@@ -33,6 +35,8 @@ public class ServletPosts extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
+        resp.setContentType("text/html;charset=UTF-8");
+        resp.setCharacterEncoding("UTF-8");
+        req.setCharacterEncoding("UTF-8");
     }
 }

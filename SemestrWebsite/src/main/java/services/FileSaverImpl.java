@@ -14,10 +14,18 @@ import java.util.Optional;
 
         @Override
         public Optional<String> saveFile(Part p, String directoryName) {
-            if(p.getSize() != 0) {
-                String resultFileAddress = basicPath + File.separator + directoryName;
+                if(p.getSize() != 0) {
+
+/*                String resultFileAddress = basicPath;
+                String [] directorPath = directoryName.split("/");
+                for(String partPath:directorPath){
+                    resultFileAddress += "/" + partPath;
+                    new File(resultFileAddress).mkdirs();
+                }*/
+
+                String resultFileAddress = basicPath + directoryName;
                 File file = new File(resultFileAddress);
-                if (!file.exists()) file.mkdir();
+                file.mkdirs();
                 String[] splittedFileName = p.getSubmittedFileName().split("\\.");
                 String fileName = Math.random() + "." + splittedFileName[splittedFileName.length - 1];
                 String fullFileName = resultFileAddress + File.separator + fileName;

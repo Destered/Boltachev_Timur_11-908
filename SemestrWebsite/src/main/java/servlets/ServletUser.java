@@ -23,6 +23,7 @@ public class ServletUser extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html;charset=UTF-8");
         resp.setCharacterEncoding("UTF-8");
+        req.setCharacterEncoding("UTF-8");
         HttpSession session = req.getSession();
         String userId = req.getParameter("user_id");
         Optional<User> reqUser = us.findUserById(Integer.parseInt(userId));

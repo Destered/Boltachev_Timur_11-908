@@ -17,7 +17,7 @@
                         let el = document.createElement("div")
                         el.innerHTML =  '<div class="card mb-4"> ' +
                             '<img class="card-img-top" ' +
-                            'src="../posts/'+ postItem[2] +'" ' +
+                            'src="..'+ postItem[2] +'" ' +
                             'alt="Card image cap"> <div class="card-body"> ' +
                             '<h2 class="card-title">'+ postItem[0] +'</h2> ' +
                             '<p class="card-text">'+ postItem[1] +'</p> ' +
@@ -30,6 +30,9 @@
     })
 </script>
 <@standardPage>
+    <div>
+        <a class="btn btn-danger stretched-link btnCreatePost" href="/post/create">Создать пост</a>
+    </div>
 
     <div>
         <ul id="list" class="list-group listSize">
