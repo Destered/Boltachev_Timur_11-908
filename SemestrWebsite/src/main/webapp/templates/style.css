@@ -220,11 +220,13 @@ button:hover {
     height: 30px;
 }
 .search_box {
-    position: relative;
+    position: absolute;
+    top: 5px;
+    left: 25%;
 }
 .search_box input[type="text"] {
     display: block;
-    width: 100%;
+    width: 200%;
     height: 35px;
     line-height: 35px;
     padding: 0;
@@ -251,18 +253,17 @@ button:hover {
     background: url(https://snipp.ru/demo/127/search.png) 0 0 no-repeat;
     position: absolute;
     top: 9px;
-    right: 16px;
+    left: 280px;
 }
 
-/* Стили для плашки с результатами */
+
 .search_result {
-    position: absolute;
+    position: relative;
     top: 100%;
     left: 0;
     border: 1px solid #ddd;
     background: #fff;
     padding: 10px;
     z-index: 9999;
-    box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
 }
 

@@ -30,7 +30,7 @@ public class ServletAjaxSearch extends HttpServlet {
         List<User> userList = us.getAllUsersLikeString(search);
         StringBuilder answer = new StringBuilder();
         for(User user:userList){
-            answer.append(user.getUsername()).append(";");
+            answer.append(user.getUsername()).append("#").append(user.getId()).append(';');
         }
         writer.println(answer);
     }
