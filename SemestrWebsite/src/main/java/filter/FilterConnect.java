@@ -12,7 +12,7 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.Optional;
 
-@WebFilter(urlPatterns = {"/register", "/login", "/profile"}, filterName = "AuthFilter")
+@WebFilter(urlPatterns = {"/register", "/login", "/profile","/main","/news","/post","/post/create","/chat"}, filterName = "AuthFilter")
 public class FilterConnect implements Filter {
     UserService us = new UserService();
     private FilterConfig config = null;
@@ -28,6 +28,9 @@ public class FilterConnect implements Filter {
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
         HttpServletRequest request = (HttpServletRequest) servletRequest;
         HttpServletResponse response = (HttpServletResponse) servletResponse;
+        response.setContentType("text/html;charset=UTF-8");
+        response.setCharacterEncoding("UTF-8");
+        request.setCharacterEncoding("UTF-8");
 
         HttpSession session = request.getSession();
 

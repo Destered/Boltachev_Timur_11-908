@@ -1,9 +1,11 @@
 package services;
 
 import models.User;
+import org.mindrot.jbcrypt.BCrypt;
 import repositories.UsersDaoImpl;
 
 import java.sql.SQLException;
+import java.util.List;
 import java.util.Optional;
 
 
@@ -23,21 +25,25 @@ public class UserService{
 
     public Optional<User> findUserById(Integer id){
         return usersDao.find(id);
-
     }
+
+
 
     public Optional<User> findUserByUsername(String username){
         return usersDao.findByUsername(username);
 
     }
 
+    public List<User> getAllUsersLikeString(String like){
+        return usersDao.getAllUsersLikeString(like);
+    }
 
 
-    public boolean login(User user){
-        Optional<User> checkUser = usersDao.findByUsername(user.getUsername());
+    public boolean login(String username,String password){
+        Optional<User> checkUser = usersDao.findByUsername(username);
         if(checkUser.isPresent()){
             User checked = checkUser.get();
-            return checked.getPassword().equals(user.getPassword());
+            return BCrypt.checkpw(password,checked.getPassword());
         }
         else return false;
     }

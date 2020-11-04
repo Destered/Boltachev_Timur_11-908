@@ -14,7 +14,7 @@ public class ConnectionProvider {
     private ConnectionProvider(){
     }
 
-    public static Connection getConnection() throws ClassNotFoundException{
+    public static synchronized Connection getConnection() throws ClassNotFoundException{
         if(instance == null){
             Class.forName(driverClassName);
             try {

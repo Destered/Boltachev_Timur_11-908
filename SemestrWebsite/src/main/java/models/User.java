@@ -8,6 +8,19 @@ public class User implements Serializable {
     private String password;
     private String email;
     private Integer id;
+    private String firstName;
+    private String secondName;
+
+    public String getImagePath() {
+        return imagePath;
+    }
+
+    public void setImagePath(String imagePath) {
+        this.imagePath = imagePath;
+    }
+
+    private String about;
+    private String imagePath;
 
     public Integer getId() {
         return id;
@@ -17,6 +30,8 @@ public class User implements Serializable {
         this.id = id;
     }
 
+    public User(){}
+
     public User(String username, String password, String email, Integer id) {
         this.username = username;
         this.password = password;
@@ -24,9 +39,47 @@ public class User implements Serializable {
         this.id = id;
     }
 
-    public User(String username, String password) {
+    public User(String username, String password, String email, String firstName, String secondName, String about) {
         this.username = username;
         this.password = password;
+        this.email = email;
+        this.firstName = firstName;
+        this.secondName = secondName;
+        this.about = about;
+    }
+
+    public User(String username, String password, String email, Integer id, String firstName, String secondName, String about) {
+        this.username = username;
+        this.password = password;
+        this.email = email;
+        this.id = id;
+        this.firstName = firstName;
+        this.secondName = secondName;
+        this.about = about;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getSecondName() {
+        return secondName;
+    }
+
+    public void setSecondName(String secondName) {
+        this.secondName = secondName;
+    }
+
+    public String getAbout() {
+        return about;
+    }
+
+    public void setAbout(String about) {
+        this.about = about;
     }
 
     public User(String username, String password, String email) {
@@ -72,4 +125,6 @@ public class User implements Serializable {
     public void setPassword(String password) {
         this.password = password;
     }
+
+
 }
