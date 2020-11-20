@@ -12,7 +12,7 @@ import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.Map;
 
-public class ServletLogin extends HttpServlet {
+public class LoginServlet extends HttpServlet {
     Helper helper = new Helper();
 
     @Override

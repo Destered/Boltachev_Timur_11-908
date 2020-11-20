@@ -14,7 +14,7 @@ import java.io.Writer;
 import java.util.List;
 
 @WebServlet("/ajax_search")
-public class ServletAjaxSearch extends HttpServlet {
+public class AjaxSearchServlet extends HttpServlet {
     UserService us = new UserService();
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

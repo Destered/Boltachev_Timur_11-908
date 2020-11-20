@@ -19,7 +19,7 @@ import java.util.Map;
 import java.util.Optional;
 
 @MultipartConfig
-public class ServletPostCreate extends HttpServlet {
+public class PostCreateServlet extends HttpServlet {
 
     private FileSaverImpl fileSaver;
     private UsersDao usersDao;

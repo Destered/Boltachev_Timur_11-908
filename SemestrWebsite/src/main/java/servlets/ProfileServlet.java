@@ -11,7 +11,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 
-public class ServletProfile extends HttpServlet {
+public class ProfileServlet extends HttpServlet {
     Helper helper = new Helper();
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession();

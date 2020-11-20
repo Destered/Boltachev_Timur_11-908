@@ -1,7 +1,5 @@
 package servlets;
 
-import models.Chat;
-import models.User;
 import services.Helper;
 
 import javax.servlet.ServletException;
@@ -13,22 +11,27 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-public class ServletChat extends HttpServlet {
+public class HelpServlet extends HttpServlet {
     Helper helper = new Helper();
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html;charset=UTF-8");
         resp.setCharacterEncoding("UTF-8");
-        req.setCharacterEncoding("UTF-8");
         HttpSession session = req.getSession();
-        User user = (User)session.getAttribute("user");
-        if(user != null) {
+        if(session.getAttribute("user") != null){
             Map<String, Object> root = new HashMap<>();
             root.put("isLogged",true);
-            helper.render(req,resp,"chat.ftl",root);
+            helper.render(req,resp,"help.ftl",root);
+        }else{
+            Map<String, Object> root = new HashMap<>();
+            root.put("isLogged",false);
+            helper.render(req,resp,"help.ftl",root);
         }
-        else {
-            resp.sendRedirect("/login");
-        }
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
     }
 }

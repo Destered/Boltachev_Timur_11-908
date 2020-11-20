@@ -11,7 +11,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-public class ServletNews extends HttpServlet {
+public class NewsServlet extends HttpServlet {
     Helper helper = new Helper();
 
     @Override

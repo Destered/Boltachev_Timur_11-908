@@ -16,7 +16,7 @@ import java.util.Optional;
 
         @WebServlet("/saveImage")
         @MultipartConfig
-        public class ServletPhotoUpload extends HttpServlet {
+        public class PhotoUploadServlet extends HttpServlet {
             private FileSaverImpl fileSaver;
             private UsersDao usersDao;
             private Helper helper;

@@ -8,21 +8,21 @@
     <script src="/templates/test.js"></script>
     <form action="login" method="POST" name="authWindow" autocomplete="off">
         <label>
-            <p class="label-txt">ENTER YOUR USERNAME</p>
+            <p class="label-txt">Имя пользователя</p>
             <input name="username" type="text" class="input">
             <div class="line-box">
                 <div class="line"></div>
             </div>
         </label>
         <label>
-            <p class="label-txt">ENTER YOUR PASSWORD</p>
+            <p class="label-txt">Пароль</p>
             <input name="password" type="password" class="input">
             <div class="line-box">
                 <div class="line"></div>
             </div>
         </label>
         <div class="form-check">
-            <input class="form-check-input" name="remember" type="checkbox" value="" id="defaultCheck1">Remember Me
+            <input class="form-check-input" name="remember" type="checkbox" value="" id="defaultCheck1">Запомнить меня
         </div>
         <br>
         <button type="submit" class="btn btn-success">Войти</button>
