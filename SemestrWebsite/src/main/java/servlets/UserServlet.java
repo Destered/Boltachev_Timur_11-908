@@ -44,7 +44,7 @@ public class UserServlet extends HttpServlet {
             if(currentUser != null){
                 root.put("isLogged",true);
                 if(currentUser.equals(user)){
-                    root.put("pageOverlord",true);
+                    resp.sendRedirect("/profile");
                 }
                 helper.render(req,resp,"profile.ftl",root);
             }else{

@@ -5,6 +5,8 @@
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="/templates/test.js"></script>
+ 
+
     <form action="register" method="POST" name="authWindow" autocomplete="off">
 
         <label>
@@ -37,7 +39,7 @@
         </label>
         <label>
             <p class="label-txt">Пароль</p>
-            <input name="password" type="password" class="input">
+            <input name="password" id="password" type="password" class="input">
             <div class="line-box">
                 <div class="line"></div>
             </div>

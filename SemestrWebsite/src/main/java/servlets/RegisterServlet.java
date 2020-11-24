@@ -20,6 +20,7 @@ public class RegisterServlet extends HttpServlet {
     Helper helper = new Helper();
     String checkEmail= "^(.+)@(.+)$";
     String checkPassword= "[$@_/\\\\]";
+
     Pattern emailCheck = Pattern.compile(checkEmail,Pattern.CASE_INSENSITIVE);
     Pattern passwordCheck = Pattern.compile(checkPassword,Pattern.CASE_INSENSITIVE);
     String emailAlertScript ="<script> alert('Введите валидную почту!')</script>";
