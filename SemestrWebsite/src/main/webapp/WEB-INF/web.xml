@@ -6,7 +6,7 @@
 
     <servlet>
         <servlet-name>ServletRegister</servlet-name>
-        <servlet-class>servlets.ServletRegister</servlet-class>
+        <servlet-class>servlets.RegisterServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>ServletRegister</servlet-name>
@@ -15,7 +15,7 @@
     
     <servlet>
         <servlet-name>LoginServlet</servlet-name>
-        <servlet-class>servlets.ServletLogin</servlet-class>
+        <servlet-class>servlets.LoginServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
@@ -24,11 +24,99 @@
     
     <servlet>
         <servlet-name>ServletProfile</servlet-name>
-        <servlet-class>servlets.ServletProfile</servlet-class>
+        <servlet-class>servlets.ProfileServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>ServletProfile</servlet-name>
         <url-pattern>/profile</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>ServletMain</servlet-name>
+        <servlet-class>servlets.MainServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>ServletMain</servlet-name>
+        <url-pattern>/main</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>ServletNews</servlet-name>
+        <servlet-class>servlets.NewsServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ServletNews</servlet-name>
+        <url-pattern>/news</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>ServletHelp</servlet-name>
+        <servlet-class>servlets.HelpServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ServletHelp</servlet-name>
+        <url-pattern>/help</url-pattern>
+    </servlet-mapping>
+
+    
+    <servlet>
+        <servlet-name>ServletPost</servlet-name>
+        <servlet-class>servlets.PostsServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ServletPost</servlet-name>
+        <url-pattern>/post</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>ServletPostCreate</servlet-name>
+        <servlet-class>servlets.PostCreateServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ServletPostCreate</servlet-name>
+        <url-pattern>/post/create</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>ServletEditUser</servlet-name>
+        <servlet-class>servlets.EditUserServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ServletEditUser</servlet-name>
+        <url-pattern>/editUser</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>ServletUploadPhoto</servlet-name>
+        <servlet-class>servlets.PhotoUploadServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ServletUploadPhoto</servlet-name>
+        <url-pattern>/uploadPhoto</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>ServletGetNews</servlet-name>
+        <servlet-class>servlets.GetNewsServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ServletGetNews</servlet-name>
+        <url-pattern>/getnews</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>ServletChat</servlet-name>
+        <servlet-class>servlets.ChatServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ServletChat</servlet-name>
+        <url-pattern>/chat</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>ServletChatData</servlet-name>
+        <servlet-class>servlets.ChatDataServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ServletChatData</servlet-name>
+        <url-pattern>/chatdata</url-pattern>
+    </servlet-mapping>
 </web-app>

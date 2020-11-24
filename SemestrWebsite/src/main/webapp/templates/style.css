@@ -1,0 +1,284 @@
+a[name="element"] {
+    position: relative;
+    cursor: pointer;
+    line-height: 1;
+    color: #189228;
+    text-decoration: none;
+
+}
+a[name="element"]:after {
+    display: block;
+    position: absolute;
+    left: 0;
+    width: 0;
+    background: #189228;
+    height: 2px;
+    content: "";
+    transition: width 0.3s ease-out;
+}
+
+a[name="element"]:hover:after,
+a[name="element"]:focus:after {
+    width: 100%;
+}
+
+.bg-header{
+    background: #21d192;
+}
+
+
+
+body {
+    background-color: #C5E1A5 !important;
+}
+form[name="authWindow"] {
+    width: 60%;
+    margin: 60px auto;
+    padding: 60px 120px 80px 120px;
+    text-align: center;
+    background-color: white;
+    -webkit-box-shadow: 2px 2px 3px rgba(0,0,0,0.1);
+    box-shadow: 2px 2px 3px rgba(0,0,0,0.1);
+}
+label {
+    display: block;
+    position: relative;
+    margin: 40px 0px;
+}
+.label-txt {
+    position: absolute;
+    top: -1.6em;
+    padding: 10px;
+    font-family: sans-serif;
+    font-size: .8em;
+    letter-spacing: 1px;
+    color: rgb(120,120,120);
+    transition: ease .3s;
+}
+.input {
+    width: 100%;
+    padding: 10px;
+    background: transparent;
+    border: none;
+    outline: none;
+}
+
+.line-box {
+    position: relative;
+    width: 100%;
+    height: 2px;
+    background: #BCBCBC;
+}
+
+.line {
+    position: absolute;
+    width: 0%;
+    height: 2px;
+    top: 0px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #8BC34A;
+    transition: ease .6s;
+}
+
+.input:focus + .line-box .line {
+    width: 100%;
+}
+
+.label-active {
+    top: -3em;
+}
+
+button {
+    display: inline-block;
+    padding: 12px 24px;
+    background: rgb(220,220,220);
+    font-weight: bold;
+    color: rgb(120,120,120);
+    border: none;
+    outline: none;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: ease .3s;
+}
+
+button:hover {
+    background: #8BC34A;
+    color: #ffffff;
+}
+
+.inputPhotoSize{
+    width: 100px;
+    height: 50px;
+}
+
+.noPadding{
+    padding: 0 0 0 0;
+}
+
+.inputPhotoBtn{
+
+}
+
+.profilePage{
+    position: relative;
+    background: #abcb94;
+    margin: 20px 60px 20px 60px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    box-shadow: 2px 2px 3px rgba(0,0,0,0.1);
+}
+.btnPadding{
+    margin-left: 40px;
+    position: relative;
+}
+
+.editPage{
+    position: relative;
+    background: #abcb94;
+    margin: 20px 60px 20px 60px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    box-shadow: 2px 2px 3px rgba(0,0,0,0.1);
+}
+
+.mainBlock{
+    position: relative;
+    background: #abcb94;
+    margin: 20px 60px 20px 60px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    box-shadow: 2px 2px 3px rgba(0,0,0,0.1);
+}
+
+.listSize{
+    width: 40%;
+    margin-left: 30%;
+    margin-bottom: 20px;
+    box-shadow: 2px 2px 3px rgba(0,0,0,0.1);
+}
+.chat {
+    border:1px solid #333;
+    margin: 15px 15px 15px 10%;
+    width:60%;
+    height:70%;
+    background:#555;
+    color:#fff;
+}
+
+.chat-messages {
+    min-height:93%;
+    max-height:93%;
+    overflow:auto;
+}
+
+.chat-messages__content {
+    padding:1px;
+}
+
+.chat__message {
+    border-left:3px solid #333;
+    margin-top:2px;
+    padding:2px;
+}
+
+.chat__message_black {
+    border-color:#000;
+}
+
+.chat__message_blue {
+    border-color:blue;
+}
+
+.chat__message_green {
+    border-color:green;
+}
+
+.chat__message_red {
+    border-color:red;
+}
+
+.chat-input {
+    min-height:6%;
+}
+
+.chat-form__input {
+    width:79%;
+    font-family:arial;
+    font-size:16px;
+    vertical-align:middle;
+    background:#333;
+    color:#fff;
+    border:0;
+    display:inline-block;
+    margin:1px;
+    height:30px;
+}
+
+.chatBtnPadding{
+    margin: 0 0 0 15px;
+    height: 30px;
+}
+.search_box {
+    position: absolute;
+    top: 5px;
+    left: 25%;
+}
+.search_box input[type="text"] {
+    display: block;
+    width: 200%;
+    height: 35px;
+    line-height: 35px;
+    padding: 0;
+    margin: 0;
+    border: 1px solid #fd4836;
+    outline: none;
+    overflow: hidden;
+    border-radius: 4px;
+    background-color: rgb(255, 255, 255);
+    text-indent: 15px;
+    font-size: 14px;
+    color: #222;
+}
+.search_box input[type="submit"] {
+    display: inline-block;
+    width: 17px;
+    height: 17px;
+    padding: 0;
+    margin: 0;
+    border: 0;
+    outline: 0;
+    overflow: hidden;
+    text-indent: -999px;
+    background: url(https://snipp.ru/demo/127/search.png) 0 0 no-repeat;
+    position: absolute;
+    top: 9px;
+    left: 280px;
+}
+
+
+.search_result {
+    position: relative;
+    top: 100%;
+    left: 0;
+    border: 1px solid #ddd;
+    background: #fff;
+    padding: 10px;
+    z-index: 9999;
+}
+
+.form_base{
+    width: 60%;
+    margin: 60px auto;
+    padding: 60px 120px 80px 120px;
+    text-align: center;
+    background-color: white;
+    -webkit-box-shadow: 2px 2px 3px rgba(0,0,0,0.1);
+    box-shadow: 2px 2px 3px rgba(0,0,0,0.1);
+}
+
+.btnCreatePost{
+    position: relative;
+    left: 80%;
+}
+
