@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.Optional;
 
 @WebServlet("/getpost")
-public class ServletGetPost extends HttpServlet {
+public class GetPostServlet extends HttpServlet {
     PostService ps = new PostService();
     UserService us = new UserService();
 

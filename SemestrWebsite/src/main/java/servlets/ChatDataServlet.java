@@ -13,7 +13,7 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.List;
 
-public class ServletChatData extends HttpServlet {
+public class ChatDataServlet extends HttpServlet {
     Helper helper = new Helper();
     Chat chatStorage = new Chat();
     String alertScript="<script> alert('Введите валидную почту!')</script>";

@@ -30,10 +30,11 @@
     })
 </script>
 <@standardPage>
+    <#if isLogged>
     <div>
         <a class="btn btn-danger stretched-link btnCreatePost" href="/post/create">Создать пост</a>
     </div>
-
+</#if>
     <div>
         <ul id="list" class="list-group listSize">
 

@@ -1,6 +1,7 @@
 <#ftl encoding="utf-8">
 <#include "standardPage.ftl" />
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
 
     <script>
         let messages__container = document.getElementById('messages');//Контейнер сообщений — скрипт будет добавлять в него сообщения
@@ -8,7 +9,6 @@
         let sendForm = document.getElementById('chat-form'); //Форма отправки
         let messageInput = document.getElementById('message-text');
         let lastMsgIndex = 0;
-
         function getMsg() {
             clearBox();
             $.ajax({
@@ -34,9 +34,10 @@
         }
 
 
+
         function clearBox()
         {
-            $("#messages").empty();
+            $('#messages').empty();
         }
 
         function escapeHtml(text) {
@@ -58,21 +59,25 @@
                 alert('Введите сообщение!')
                 document.getElementById('message-text').focus()
             } else {
-                $.ajax({
-                    url: "/chatdata",
-                    type: "GET",
-                    data: {message: messageText, method: 'sendMsg'},
-                    async: false,
-                    success : function(data) {
-                        if(data.toString().charAt(0) === "1"){
-                            alert("Input Correct Message")
+                if(messageText.search("%%%\*%%%") === -1 && messageText.search("###\*###") === -1) {
+                    $.ajax({
+                        url: "/chatdata",
+                        type: "GET",
+                        data: {message: messageText, method: 'sendMsg'},
+                        async: false,
+                        success: function (data) {
+                            if (data.toString().charAt(0) === "1") {
+                                alert("Input Correct Message")
+                            }
                         }
-                    }
-                })
-                message.value = "";
-                getMsg();
-                message.scrollTop = message.scrollHeight;
-                document.getElementById('message-text').focus()
+                    })
+                    message.value = "";
+                    getMsg();
+                    message.scrollTop = message.scrollHeight;
+                    document.getElementById('message-text').focus()
+                } else{
+                    alert("Input Correct Message")
+                }
             }
         }
 
@@ -80,6 +85,29 @@
     </script>
 
 <@standardPage>
+    <button type="button" style="position:relative;left: 67%;" class="btn btn-warning" data-toggle="modal" data-target="#myModal">
+        ?
+    </button>
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Правила</h4>
+                </div>
+                <div class="modal-body">
+                    Соблюдайте правила общения с другими людьми
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
     <div class='chat'>
         <div class='chat-messages'>
             <div class='chat-messages__content' id='messages'>
@@ -88,7 +116,8 @@
         </div>
         <div class='chat-input'>
             <form method='get' id='chat-form'>
-                <input type='text' id='message-text' autocomplete="off" class='chat-form__input' placeholder='Введите сообщение'> <button type='button' id="message-btn" class='chatBtnPadding btnPadding btn btn-outline-dark' onclick="send()">Отправить</button>
+                <input type='text' id='message-text' autocomplete="off" class='chat-form__input' placeholder='Введите сообщение'>
+                <button type='button' id="message-btn" class='chatBtnPadding btnPadding btn btn-outline-dark' onclick="send()">Отправить</button>
             </form>
         </div>
     </div>

@@ -6,7 +6,7 @@
 
     <servlet>
         <servlet-name>ServletRegister</servlet-name>
-        <servlet-class>servlets.ServletRegister</servlet-class>
+        <servlet-class>servlets.RegisterServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>ServletRegister</servlet-name>
@@ -15,7 +15,7 @@
     
     <servlet>
         <servlet-name>LoginServlet</servlet-name>
-        <servlet-class>servlets.ServletLogin</servlet-class>
+        <servlet-class>servlets.LoginServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
@@ -24,7 +24,7 @@
     
     <servlet>
         <servlet-name>ServletProfile</servlet-name>
-        <servlet-class>servlets.ServletProfile</servlet-class>
+        <servlet-class>servlets.ProfileServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>ServletProfile</servlet-name>
@@ -33,7 +33,7 @@
 
     <servlet>
         <servlet-name>ServletMain</servlet-name>
-        <servlet-class>servlets.ServletMain</servlet-class>
+        <servlet-class>servlets.MainServlet</servlet-class>
     </servlet>
 
     <servlet-mapping>
@@ -43,7 +43,7 @@
 
     <servlet>
         <servlet-name>ServletNews</servlet-name>
-        <servlet-class>servlets.ServletNews</servlet-class>
+        <servlet-class>servlets.NewsServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>ServletNews</servlet-name>
@@ -52,7 +52,7 @@
     
     <servlet>
         <servlet-name>ServletHelp</servlet-name>
-        <servlet-class>servlets.ServletHelp</servlet-class>
+        <servlet-class>servlets.HelpServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>ServletHelp</servlet-name>
@@ -62,7 +62,7 @@
     
     <servlet>
         <servlet-name>ServletPost</servlet-name>
-        <servlet-class>servlets.ServletPosts</servlet-class>
+        <servlet-class>servlets.PostsServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>ServletPost</servlet-name>
@@ -71,7 +71,7 @@
 
     <servlet>
         <servlet-name>ServletPostCreate</servlet-name>
-        <servlet-class>servlets.ServletPostCreate</servlet-class>
+        <servlet-class>servlets.PostCreateServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>ServletPostCreate</servlet-name>
@@ -79,7 +79,7 @@
     </servlet-mapping>
     <servlet>
         <servlet-name>ServletEditUser</servlet-name>
-        <servlet-class>servlets.ServletEditUser</servlet-class>
+        <servlet-class>servlets.EditUserServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>ServletEditUser</servlet-name>
@@ -88,7 +88,7 @@
 
     <servlet>
         <servlet-name>ServletUploadPhoto</servlet-name>
-        <servlet-class>servlets.ServletPhotoUpload</servlet-class>
+        <servlet-class>servlets.PhotoUploadServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>ServletUploadPhoto</servlet-name>
@@ -97,7 +97,7 @@
     
     <servlet>
         <servlet-name>ServletGetNews</servlet-name>
-        <servlet-class>servlets.ServletGetNews</servlet-class>
+        <servlet-class>servlets.GetNewsServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>ServletGetNews</servlet-name>
@@ -105,7 +105,7 @@
     </servlet-mapping>
     <servlet>
         <servlet-name>ServletChat</servlet-name>
-        <servlet-class>servlets.ServletChat</servlet-class>
+        <servlet-class>servlets.ChatServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>ServletChat</servlet-name>
@@ -113,7 +113,7 @@
     </servlet-mapping>
     <servlet>
         <servlet-name>ServletChatData</servlet-name>
-        <servlet-class>servlets.ServletChatData</servlet-class>
+        <servlet-class>servlets.ChatDataServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>ServletChatData</servlet-name>

@@ -16,7 +16,7 @@ import java.util.Map;
 import java.util.Optional;
 
 @WebServlet("/user")
-public class ServletUser extends HttpServlet {
+public class UserServlet extends HttpServlet {
     Helper helper = new Helper();
     UserService us = new UserService();
     @Override
@@ -27,6 +27,10 @@ public class ServletUser extends HttpServlet {
         HttpSession session = req.getSession();
         String userId = req.getParameter("user_id");
         Optional<User> reqUser = us.findUserById(Integer.parseInt(userId));
+        User currentUser = null;
+        if(session.getAttribute("user") != null){
+            currentUser = (User)session.getAttribute("user");
+        }
         if(reqUser.isPresent()){
             User user = reqUser.get();
             Map<String, Object> root = new HashMap<>();
@@ -37,8 +41,11 @@ public class ServletUser extends HttpServlet {
             root.put("username",user.getUsername());
             root.put("imagepath",user.getImagePath());
             root.put("about",user.getAbout());
-            if(session.getAttribute("user") != null){
+            if(currentUser != null){
                 root.put("isLogged",true);
+                if(currentUser.equals(user)){
+                    resp.sendRedirect("/profile");
+                }
                 helper.render(req,resp,"profile.ftl",root);
             }else{
                 root.put("isLogged",false);

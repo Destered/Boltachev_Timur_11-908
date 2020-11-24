@@ -14,7 +14,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-public class ServletEditUser extends HttpServlet {
+public class EditUserServlet extends HttpServlet {
     Helper helper = new Helper();
     UserService us = new UserService();
     UsersDaoImpl usersDao = new UsersDaoImpl();
