@@ -23,6 +23,8 @@ public class Client {
 
             System.out.println("Введите свой ник:");
             out.println(scan.nextLine());
+            System.out.println("Введите номер комнаты(1,2,3):");
+            out.println(scan.nextLine());
             String str = "";
             while (!str.equals("\\q")) {
                 str = scan.nextLine();
