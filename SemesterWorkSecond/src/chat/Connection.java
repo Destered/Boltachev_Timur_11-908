@@ -35,7 +35,7 @@ public class Connection extends Thread {
         try {
             name = in.readLine();
             try {
-                room = Integer.parseInt(in.readLine());
+                room = Integer.parseInt(in.readLine().substring(1));
             } catch (Exception e) {
                 out.println("Неправильный номер");
                 this.close(true);
@@ -43,13 +43,19 @@ public class Connection extends Thread {
             if(server.roomIsCreat(room))curRoom=server.connectToRoom(room);
             else curRoom=server.createRoom(room);
             if (isWorking) {
-                curRoom.user.add(this);
-                synchronized (curRoom) {
-                    Iterator<Connection> iter = curRoom.user.iterator();
-                    while (iter.hasNext()) {
-                        ((Connection) iter.next()).out.println(name + " теперь в комнате");
+                if (curRoom != null) {
+                    curRoom.user.add(this);
+                    synchronized (curRoom) {
+                        Iterator<Connection> iter = curRoom.user.iterator();
+                        while (iter.hasNext()) {
+                            ((Connection) iter.next()).out.println(name + " теперь в комнате");
+                        }
                     }
+
+                }else{
+                    out.println("Комната заполнена");
                 }
+            }
 
                 String str = "";
                 while (true) {
@@ -59,7 +65,7 @@ public class Connection extends Thread {
                     synchronized (curRoom) {
                         Iterator<Connection> iter = curRoom.user.iterator();
                         while (iter.hasNext()) {
-                            ((Connection) iter.next()).out.println(name + ": " + str);
+                            ((Connection) iter.next()).out.println(str);
                         }
                     }
                 }
@@ -69,7 +75,6 @@ public class Connection extends Thread {
                     ((Connection) iter.next()).out.println(name + " больше не с нами");
                 }
             }
-        }
         } catch (IOException e) {
             e.printStackTrace();
         } finally {

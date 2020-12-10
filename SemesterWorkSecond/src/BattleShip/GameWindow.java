@@ -17,6 +17,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.Rectangle;
@@ -37,17 +38,16 @@ public class GameWindow extends Application {
    public PrintWriter out;
    public Resender resend;
     public Button btn_init;
+    public Button btn_setTurn;
     private boolean isRun;
    @FXML
-    public VBox box_player;
+    public GridPane box_player;
     @FXML
-    public VBox box_enemy;
-    @FXML
-    Board enemyBoard;
-    Board playerBoard;
+    public GridPane box_enemy;
+
     @FXML
     public TextField tf_roomNum;
-    private boolean enemyTurn = false;
+    private boolean enemyTurn = true;
     @FXML
     public Button btn_connectToTheRoom;
     @FXML
@@ -94,42 +94,41 @@ public class GameWindow extends Application {
             @Override
             public void handle(MouseEvent event) {
                 Cell cell = (Cell) event.getSource();
-                enemyTurn = !cell.shoot();
-                sendMessage("0"+ cell.x + ";" + cell.y);
+                cell.shoot();
+                sendMessage("0"+cell.x+";"+cell.y);
             }
         };
 
         for (int y = 0; y < 10; y++) {
-            HBox eBox = new HBox();
-            HBox pBox = new HBox();
             for (int x = 0; x < 10; x++) {
                 Cell e1 = new Cell(x, y,true);
                 Cell p1 = new Cell(x, y,false);
                 e1.setOnMouseClicked(handler);
-                eBox.getChildren().add(e1);
-                pBox.getChildren().add(p1);
+                endMove();
+                box_player.add(p1,y,x);
+                box_enemy.add(e1,y,x);
             }
-            box_player.getChildren().add(pBox);
-            box_enemy.getChildren().add(eBox);
+
         }
+        startMove();
     }
 
     private void checkMessage(String message) {
         // 0 - ход| 1 - выйграл первый | 2 - выйграл второй | 3 - инфа | 4 - начало игры
         int action = Integer.parseInt(message.charAt(0) +"");
         String info;
-        switch(message.charAt(0)){
-            case '1':
-            case '2': {
+        switch(action){
+            case 1:
+            case 2: {
                 gameOver(action);
                 break;
             }
-            case '0':{
+            case 0:{
                 info = message.substring(1);
                 getStep(info);
                 break;
             }
-            case '3':{
+            case 3:{
                 info = message.substring(1);
                 showMessage(info);
                 break;
@@ -141,7 +140,7 @@ public class GameWindow extends Application {
     }
 
     private void showMessage(String info) {
-
+        ta_gameInfoPanel.setText(ta_gameInfoPanel.getText() + "\n" + info);
     }
 
     public void startConnection() {
@@ -151,6 +150,8 @@ public class GameWindow extends Application {
             out = new PrintWriter(socket.getOutputStream(), true);
             resend = new Resender(this);
             setDisabledConnect();
+/*            out.println(tf_usernameInput.getText().trim());
+            out.println(tf_roomNum.getText());*/
             resend.start();
             out.println("3"+tf_usernameInput.getText().trim());
             out.println("3"+tf_roomNum.getText());
@@ -161,15 +162,16 @@ public class GameWindow extends Application {
 
     public void sendMessage(String message) {
        out.println(message);
-       ta_gameInfoPanel.setText(ta_gameInfoPanel.getText() + "\n" + message);
     }
 
     public void startMove(){
-
+        enemyTurn = false;
+        box_enemy.setDisable(false);
     }
 
     public void endMove(){
-
+        enemyTurn = true;
+        box_enemy.setDisable(true);
     }
 
     public void getMessage(String message) {
@@ -181,18 +183,27 @@ public class GameWindow extends Application {
 
     private void getStep(String info) {
         String [] coords = info.split(";");
-        int x = Integer.parseInt(coords[0]);
-        int y = Integer.parseInt(coords[1]);
-        Cell cell = getCell(x,y);
-        cell.shoot();
+        if(enemyTurn){
+            int x = Integer.parseInt(coords[0]);
+            int y = Integer.parseInt(coords[1]);
+            Cell cell = (Cell)box_player.getChildren().get(y*10+x);
+            cell.shoot();
+            startMove();
+        } else{
+            int x = Integer.parseInt(coords[0]);
+            int y = Integer.parseInt(coords[1]);
+            Cell cell = (Cell)box_enemy.getChildren().get(y*10+x);
+            cell.shoot();
+            endMove();
+        }
+
     }
 
-    private Cell getCell(int x, int y){
-        ObservableList row = box_player.getChildren();
-        Cell cell = (Cell)row.get(y);
-        return cell;
-    }
 
     private void gameOver(int action) {
+    }
+
+    public void setTurn() {
+        endMove();
     }
 }
