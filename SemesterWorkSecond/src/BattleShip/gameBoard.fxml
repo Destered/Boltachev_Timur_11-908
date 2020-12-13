@@ -66,6 +66,6 @@
               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
           </rowConstraints>
       </GridPane>
-      <Button fx:id="btn_setTurn" layoutX="262.0" layoutY="14.0" mnemonicParsing="false" onAction="#setTurn" text="Turn" />
+      <Button fx:id="btn_restart" layoutX="262.0" layoutY="14.0" mnemonicParsing="false" onAction="#restartWindows" text="Restart" visible="false" />
    </children>
 </AnchorPane>

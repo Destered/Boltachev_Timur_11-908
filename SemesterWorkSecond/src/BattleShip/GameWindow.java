@@ -5,6 +5,7 @@ import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -36,7 +37,6 @@ public class GameWindow extends Application {
     public BufferedReader in;
     public PrintWriter out;
     public Resender resend;
-    public Button btn_setTurn;
     @FXML
     public GridPane box_player;
     @FXML
@@ -49,11 +49,13 @@ public class GameWindow extends Application {
     public TextArea ta_gameInfoPanel;
     @FXML
     public TextField tf_usernameInput;
+    public Button btn_restart;
     int ship4 = 1;
     int ship3 = 1;
     int ship2 = 1;
     int ship1 = 1;
-    boolean canStart = false;
+    final int MAX_ENEMY_POINT = ship4 * 4 + ship3 * 3 + ship2 * 2 + ship1;
+    int enemyPoint = 0;
     Cell lastCell;
     boolean isFirstPlayer = false;
     private boolean isRun;
@@ -86,20 +88,19 @@ public class GameWindow extends Application {
 
     }
 
-    private void setDisabledConnect() {
-        btn_connectToTheRoom.setDisable(true);
-        tf_usernameInput.setEditable(false);
-        tf_roomNum.setEditable(false);
+    private void setDisabledConnect(boolean disable) {
+            btn_connectToTheRoom.setDisable(disable);
+            tf_usernameInput.setEditable(!disable);
+            tf_roomNum.setEditable(!disable);
     }
 
 
     private void checkMessage(String message) {
-        // 0 - ход| 1 - выйграл первый | 2 - выйграл второй | 3 - инфа | 4 - начало игры
+        // 0 - ход| 1 - проигрыш | 3 - инфа | 4 - начало игры
         int action = Integer.parseInt(message.charAt(0) + "");
         String info;
         switch (action) {
-            case 1:
-            case 2: {
+            case 1: {
                 gameOver(action);
                 break;
             }
@@ -129,8 +130,7 @@ public class GameWindow extends Application {
             @Override
             public void changed(ObservableValue<?> observable, Object oldValue,
                                 Object newValue) {
-                ta_gameInfoPanel.setScrollTop(Double.MAX_VALUE); //this will scroll to the bottom
-                //use Double.MIN_VALUE to scroll to the top
+                ta_gameInfoPanel.setScrollTop(Double.MAX_VALUE);
             }
         });
 
@@ -156,7 +156,7 @@ public class GameWindow extends Application {
             in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             out = new PrintWriter(socket.getOutputStream(), true);
             resend = new Resender(this);
-            setDisabledConnect();
+            setDisabledConnect(true);
             out.println(tf_usernameInput.getText().trim());
             out.println(tf_roomNum.getText());
             resend.start();
@@ -197,7 +197,7 @@ public class GameWindow extends Application {
                         } else if (ship1 != 0) {
                             Cell cell = (Cell) event.getSource();
                             if (placeShip(new Ship(1, verticalShip), cell.x, cell.y)) ship1--;
-                            if(ship1 == 0) {
+                            if (ship1 == 0) {
                                 box_player.setDisable(true);
                                 sendCanStart();
                             }
@@ -225,8 +225,8 @@ public class GameWindow extends Application {
     }
 
     public void sendMessage(String message) {
-        if(isFirstPlayer) message ="f"+message;
-        else message ="s"+message;
+        if (isFirstPlayer) message = "f" + message;
+        else message = "s" + message;
         out.println(message);
     }
 
@@ -249,7 +249,7 @@ public class GameWindow extends Application {
 
     private void getStep(String info) {
         String[] coords = info.split(";");
-        if(coords[0].equals("shoot")) {
+        if (coords[0].equals("shoot")) {
             if (enemyTurn) {
                 int x = Integer.parseInt(coords[1]);
                 int y = Integer.parseInt(coords[2]);
@@ -267,10 +267,18 @@ public class GameWindow extends Application {
                 cell.shoot();
 
             }
-        } else if(coords[0].equals("endMove")){
+        } else if (coords[0].equals("endMove")) {
             endMove();
-        } else if(coords[0].equals("continue")){
+        } else if (coords[0].equals("continue")) {
+            enemyPoint++;
             lastCell.setFill(Color.RED);
+            if (enemyPoint == MAX_ENEMY_POINT) {
+                disableInterface(true);
+                showMessage("Вы победили");
+                sendMessage("1");
+                btn_restart.setVisible(true);
+                disconnect();
+            }
         }
     }
 
@@ -280,10 +288,19 @@ public class GameWindow extends Application {
 
 
     private void gameOver(int action) {
+        disableInterface(true);
+        showMessage("Вы проиграли");
+        btn_restart.setVisible(true);
+        disconnect();
     }
 
-    public void setTurn() {
-        endMove();
+    private void disableInterface(boolean disable) {
+        box_player.setDisable(disable);
+        box_enemy.setDisable(disable);
+    }
+
+    public void disconnect() {
+        out.println("\\q");
     }
 
     private Cell[] getNeighbors(int x, int y) {
@@ -380,5 +397,10 @@ public class GameWindow extends Application {
         }
 
         return false;
+    }
+
+    public void restartWindows() {
+        setDisabledConnect(false);
+        btn_restart.setVisible(false);
     }
 }

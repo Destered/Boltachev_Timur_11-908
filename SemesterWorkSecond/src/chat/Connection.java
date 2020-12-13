@@ -111,10 +111,12 @@ public class Connection extends Thread {
 
     private boolean checkAllReady(){
         boolean allReady = true;
-        Iterator<Connection> iter = curRoom.user.iterator();
-        while (iter.hasNext()) {
-            if(!((Connection) iter.next()).isReady)allReady =false;
-        }
+        if(curRoom.user.size() == 2) {
+            Iterator<Connection> iter = curRoom.user.iterator();
+            while (iter.hasNext()) {
+                if (!((Connection) iter.next()).isReady) allReady = false;
+            }
+        } else allReady = false;
         return allReady;
     }
 
