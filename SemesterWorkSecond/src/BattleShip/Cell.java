@@ -15,8 +15,8 @@ public class Cell extends Rectangle {
         this.x = x;
         this.y = y;
         this.enemyBoard = enemyBoard;
-        setFill(Color.LIGHTGRAY);
-        setStroke(Color.BLACK);
+        setFill(Color.AQUA);
+        setStroke(Color.LIGHTSKYBLUE);
     }
 
     public boolean shoot() {

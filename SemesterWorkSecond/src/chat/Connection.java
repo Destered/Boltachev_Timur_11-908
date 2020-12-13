@@ -14,8 +14,11 @@ public class Connection extends Thread {
     private GameRoom curRoom;
     private Server server;
     private boolean isWorking = true;
+    public boolean isReady = false;
     private String name = "";
     private int room = 0;
+    private Connection firstPlayer;
+    private Connection secondPlayer;
 
     public Connection(Socket socket, Server server) {
         this.socket = socket;
@@ -35,7 +38,7 @@ public class Connection extends Thread {
         try {
             name = in.readLine();
             try {
-                room = Integer.parseInt(in.readLine().substring(1));
+                room = Integer.parseInt(in.readLine());
             } catch (Exception e) {
                 out.println("Неправильный номер");
                 this.close(true);
@@ -48,16 +51,7 @@ public class Connection extends Thread {
                         curRoom.user.add(this);
                         synchronized (curRoom) {
                             for (Connection connection : curRoom.user) {
-                                connection.out.println(name + " теперь в комнате");
-                            }
-                        }
-                        if (curRoom.user.size() == 2) {
-                            Iterator<Connection> iter = curRoom.user.iterator();
-                            int count = 0;
-                            while (iter.hasNext()) {
-                                if(count == 0)((Connection) iter.next()).out.println("41"); //4 - начало игры \ 1 - начинает первым
-                                else ((Connection) iter.next()).out.println("42");  //4 - начало игры \ 2 - начинает вторым
-                                count++;
+                                connection.out.println("3"+name + " теперь в комнате");
                             }
                         }
                     }
@@ -74,18 +68,38 @@ public class Connection extends Thread {
             String str = "";
             while (true) {
                 str = in.readLine();
-                if (str.equals("\\q")) break;
+                if (str.equals("canStart")) {
+                    isReady = true;
                     synchronized (curRoom) {
-                        Iterator<Connection> iter = curRoom.user.iterator();
-                        while (iter.hasNext()) {
-                            ((Connection) iter.next()).out.println(str);
+                        for (Connection connection : curRoom.user) {
+                            connection.out.println("3"+name + " готов");
                         }
                     }
+                    if(checkAllReady()){
+                        startGame();
+                    }
+                } else {
+                    if( firstPlayer == null || secondPlayer == null) setPlayer();
+                    String whoSent = str.charAt(0) + "";
+                    str = str.substring(1);
+                    boolean firstPlayerBool;
+                    if (whoSent.equals("f")) {
+                        firstPlayerBool = true;
+                    } else firstPlayerBool = false;
+                    if (str.equals("\\q")) break;
+                    synchronized (curRoom) {
+                        if (firstPlayerBool) {
+                            secondPlayer.out.println(str);
+                        } else {
+                            firstPlayer.out.println(str);
+                        }
+                    }
+                }
             }
             synchronized (curRoom) {
                 Iterator<Connection> iter = curRoom.user.iterator();
                 while (iter.hasNext()) {
-                    ((Connection) iter.next()).out.println(name + " больше не с нами");
+                    ((Connection) iter.next()).out.println("3"+name + " больше не с нами");
                 }
             }
         } catch (IOException e) {
@@ -95,12 +109,32 @@ public class Connection extends Thread {
         }
     }
 
+    private boolean checkAllReady(){
+        boolean allReady = true;
+        Iterator<Connection> iter = curRoom.user.iterator();
+        while (iter.hasNext()) {
+            if(!((Connection) iter.next()).isReady)allReady =false;
+        }
+        return allReady;
+    }
+
     private void startGame(){
+                setPlayer();
+                firstPlayer.out.println("41");//4 - начало игры \ 1 - начинает первым
+                secondPlayer.out.println("42");  //4 - начало игры \ 2 - начинает вторым
+
+        }
+
+    public void setPlayer(){
         Iterator<Connection> iter = curRoom.user.iterator();
         int count = 0;
         while (iter.hasNext()) {
-            if(count == 0)((Connection) iter.next()).out.println("41"); //4 - начало игры \ 1 - начинает первым
-            else ((Connection) iter.next()).out.println("42");  //4 - начало игры \ 2 - начинает вторым
+            if(count == 0){
+                firstPlayer = iter.next();
+            }
+            else if(count == 1) {
+                secondPlayer = iter.next();
+            }
             count++;
         }
     }

@@ -3,6 +3,8 @@ package BattleShip;
 import chat.Resender;
 import javafx.application.Application;
 import javafx.application.Platform;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -52,6 +54,8 @@ public class GameWindow extends Application {
     int ship2 = 1;
     int ship1 = 1;
     boolean canStart = false;
+    Cell lastCell;
+    boolean isFirstPlayer = false;
     private boolean isRun;
     private boolean enemyTurn = true;
 
@@ -121,19 +125,29 @@ public class GameWindow extends Application {
     }
 
     private void startGame(String info) {
-        createBoard();
+        ta_gameInfoPanel.textProperty().addListener(new ChangeListener<Object>() {
+            @Override
+            public void changed(ObservableValue<?> observable, Object oldValue,
+                                Object newValue) {
+                ta_gameInfoPanel.setScrollTop(Double.MAX_VALUE); //this will scroll to the bottom
+                //use Double.MIN_VALUE to scroll to the top
+            }
+        });
+
+        isRun = true;
         if (info.equals("1")) {
-            showMessage("Start first");
+            showMessage("Вы начинаете первым");
+            isFirstPlayer = true;
             startMove();
         } else {
             endMove();
-            showMessage("Start second");
+            showMessage("Вы начинаете вторым");
         }
 
     }
 
     private void showMessage(String info) {
-        ta_gameInfoPanel.setText(ta_gameInfoPanel.getText() + "\n" + info);
+        ta_gameInfoPanel.appendText("\n" + info);
     }
 
     public void startConnection() {
@@ -143,9 +157,10 @@ public class GameWindow extends Application {
             out = new PrintWriter(socket.getOutputStream(), true);
             resend = new Resender(this);
             setDisabledConnect();
+            out.println(tf_usernameInput.getText().trim());
+            out.println(tf_roomNum.getText());
             resend.start();
-            out.println("3" + tf_usernameInput.getText().trim());
-            out.println("3" + tf_roomNum.getText());
+            createBoard();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -154,40 +169,37 @@ public class GameWindow extends Application {
 
     private void createBoard() {
         Platform.runLater(() -> {
-            EventHandler<? super MouseEvent> enemyHandler = new EventHandler<MouseEvent>() {
-                @Override
-                public void handle(MouseEvent event) {
-                    if (isRun) {
-                        Cell cell = (Cell) event.getSource();
-                        cell.shoot();
-                        sendMessage("0" + cell.x + ";" + cell.y);
-                    }
+            EventHandler<? super MouseEvent> enemyHandler = (EventHandler<MouseEvent>) event -> {
+                if (isRun) {
+                    Cell cell = (Cell) event.getSource();
+                    cell.shoot();
+                    sendMessage("0shoot;" + cell.x + ";" + cell.y);
+                    lastCell = cell;
                 }
             };
 
-            EventHandler<? super MouseEvent> playerHandler = new EventHandler<MouseEvent>() {
-                @Override
-                public void handle(MouseEvent event) {
-                    if (!isRun) {
-                        boolean verticalShip = true;
-                        if (event.getButton() == MouseButton.PRIMARY || event.getButton() == MouseButton.SECONDARY) {
+            EventHandler<? super MouseEvent> playerHandler = (EventHandler<MouseEvent>) event -> {
+                if (!isRun) {
+                    boolean verticalShip = false;
+                    if (event.getButton() == MouseButton.PRIMARY || event.getButton() == MouseButton.SECONDARY) {
 
-                            if (event.getButton() == MouseButton.SECONDARY) verticalShip = false;
+                        if (event.getButton() == MouseButton.SECONDARY) verticalShip = true;
 
-                            if (ship4 != 0) {
-                                Cell cell = (Cell) event.getSource();
-                                if (placeShip(new Ship(4, verticalShip), cell.x, cell.y)) ship4--;
-                            } else if (ship3 != 0) {
-                                Cell cell = (Cell) event.getSource();
-                                if (placeShip(new Ship(3, verticalShip), cell.x, cell.y)) ship3--;
-                            } else if (ship2 != 0) {
-                                Cell cell = (Cell) event.getSource();
-                                if (placeShip(new Ship(2, verticalShip), cell.x, cell.y)) ship2--;
-                            } else if (ship1 != 0) {
-                                Cell cell = (Cell) event.getSource();
-                                if (placeShip(new Ship(1, verticalShip), cell.x, cell.y)) ship1--;
-                            } else {
-                                canStart = true;
+                        if (ship4 != 0) {
+                            Cell cell = (Cell) event.getSource();
+                            if (placeShip(new Ship(4, verticalShip), cell.x, cell.y)) ship4--;
+                        } else if (ship3 != 0) {
+                            Cell cell = (Cell) event.getSource();
+                            if (placeShip(new Ship(3, verticalShip), cell.x, cell.y)) ship3--;
+                        } else if (ship2 != 0) {
+                            Cell cell = (Cell) event.getSource();
+                            if (placeShip(new Ship(2, verticalShip), cell.x, cell.y)) ship2--;
+                        } else if (ship1 != 0) {
+                            Cell cell = (Cell) event.getSource();
+                            if (placeShip(new Ship(1, verticalShip), cell.x, cell.y)) ship1--;
+                            if(ship1 == 0) {
+                                box_player.setDisable(true);
+                                sendCanStart();
                             }
                         }
                     }
@@ -208,7 +220,13 @@ public class GameWindow extends Application {
 
     }
 
+    private void sendCanStart() {
+        out.println("canStart");
+    }
+
     public void sendMessage(String message) {
+        if(isFirstPlayer) message ="f"+message;
+        else message ="s"+message;
         out.println(message);
     }
 
@@ -231,18 +249,28 @@ public class GameWindow extends Application {
 
     private void getStep(String info) {
         String[] coords = info.split(";");
-        if (enemyTurn) {
-            int x = Integer.parseInt(coords[0]);
-            int y = Integer.parseInt(coords[1]);
-            Cell cell = getCell(box_player, x, y);
-            cell.shoot();
-            startMove();
-        } else {
-            int x = Integer.parseInt(coords[0]);
-            int y = Integer.parseInt(coords[1]);
-            Cell cell = getCell(box_enemy, x, y);
-            cell.shoot();
+        if(coords[0].equals("shoot")) {
+            if (enemyTurn) {
+                int x = Integer.parseInt(coords[1]);
+                int y = Integer.parseInt(coords[2]);
+                Cell cell = getCell(box_player, x, y);
+                if (!cell.shoot()) {
+                    startMove();
+                    sendMessage("0endMove");
+                } else {
+                    sendMessage("0continue");
+                }
+            } else {
+                int x = Integer.parseInt(coords[1]);
+                int y = Integer.parseInt(coords[2]);
+                Cell cell = getCell(box_enemy, x, y);
+                cell.shoot();
+
+            }
+        } else if(coords[0].equals("endMove")){
             endMove();
+        } else if(coords[0].equals("continue")){
+            lastCell.setFill(Color.RED);
         }
     }
 
@@ -334,16 +362,16 @@ public class GameWindow extends Application {
                 for (int i = y; i < y + length; i++) {
                     Cell cell = getCell(box_player, x, i);
                     cell.ship = ship;
-                    cell.setFill(Color.LIGHTBLUE);
-                    cell.setStroke(Color.GREEN);
+                    cell.setFill(Color.DARKGRAY);
+                    cell.setStroke(Color.BLACK);
 
                 }
             } else {
                 for (int i = x; i < x + length; i++) {
                     Cell cell = getCell(box_player, i, y);
                     cell.ship = ship;
-                    cell.setFill(Color.LIGHTBLUE);
-                    cell.setStroke(Color.GREEN);
+                    cell.setFill(Color.DARKGRAY);
+                    cell.setStroke(Color.BLACK);
 
                 }
             }
