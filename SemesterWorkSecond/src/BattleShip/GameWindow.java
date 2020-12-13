@@ -334,15 +334,15 @@ public class GameWindow extends Application {
                 for (int i = y; i < y + length; i++) {
                     Cell cell = getCell(box_player, x, i);
                     cell.ship = ship;
-                    cell.setFill(Color.WHITE);
-                    cell.setStroke(Color.DARKMAGENTA);
+                    cell.setFill(Color.LIGHTBLUE);
+                    cell.setStroke(Color.GREEN);
 
                 }
             } else {
                 for (int i = x; i < x + length; i++) {
                     Cell cell = getCell(box_player, i, y);
                     cell.ship = ship;
-                    cell.setFill(Color.WHITE);
+                    cell.setFill(Color.LIGHTBLUE);
                     cell.setStroke(Color.GREEN);
 
                 }
