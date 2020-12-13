@@ -42,7 +42,9 @@ public class Server {
 
     public GameRoom connectToRoom(int number){
             for(GameRoom room:roomList){
-                if(room.number == number) return room;
+                if(room.number == number) {
+                    return room;
+                }
             }
             return null;
     }

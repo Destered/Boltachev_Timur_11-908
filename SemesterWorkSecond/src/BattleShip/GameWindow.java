@@ -2,6 +2,7 @@ package BattleShip;
 
 import chat.Resender;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -62,7 +63,6 @@ public class GameWindow extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
     createContent();
-
     }
 
     private void createContent() {
@@ -89,29 +89,6 @@ public class GameWindow extends Application {
             tf_roomNum.setEditable(false);
     }
 
-    public void initBoard() {
-        EventHandler<? super MouseEvent> handler = new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                Cell cell = (Cell) event.getSource();
-                cell.shoot();
-                sendMessage("0"+cell.x+";"+cell.y);
-            }
-        };
-
-        for (int y = 0; y < 10; y++) {
-            for (int x = 0; x < 10; x++) {
-                Cell e1 = new Cell(x, y,true);
-                Cell p1 = new Cell(x, y,false);
-                e1.setOnMouseClicked(handler);
-                endMove();
-                box_player.add(p1,y,x);
-                box_enemy.add(e1,y,x);
-            }
-
-        }
-        startMove();
-    }
 
     private void checkMessage(String message) {
         // 0 - ход| 1 - выйграл первый | 2 - выйграл второй | 3 - инфа | 4 - начало игры
@@ -133,10 +110,28 @@ public class GameWindow extends Application {
                 showMessage(info);
                 break;
             }
+            case 4:{
+                info = message.substring(1);
+                startGame(info);
+                break;
+            }
             default:{
                 hasError("");
             }
         }
+    }
+
+    private void startGame(String info) {
+        createBoard();
+        if(info.equals("1")) {
+            showMessage("Start first");
+            startMove();
+        }
+        else {
+            endMove();
+            showMessage("Start second");
+        }
+
     }
 
     private void showMessage(String info) {
@@ -158,6 +153,31 @@ public class GameWindow extends Application {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    private void createBoard(){
+        Platform.runLater(() -> {
+            EventHandler<? super MouseEvent> handler = new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent event) {
+                    Cell cell = (Cell) event.getSource();
+                    cell.shoot();
+                    sendMessage("0"+cell.x+";"+cell.y);
+                }
+            };
+
+            for (int y = 0; y < 10; y++) {
+                for (int x = 0; x < 10; x++) {
+                    Cell e1 = new Cell(x, y,true);
+                    Cell p1 = new Cell(x, y,false);
+                    e1.setOnMouseClicked(handler);
+                    box_player.add(p1,y,x);
+                    box_enemy.add(e1,y,x);
+                }
+
+            }
+        });
+
     }
 
     public void sendMessage(String message) {
