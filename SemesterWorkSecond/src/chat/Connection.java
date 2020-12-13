@@ -40,35 +40,48 @@ public class Connection extends Thread {
                 out.println("Неправильный номер");
                 this.close(true);
             }
-            if(server.roomIsCreat(room))curRoom=server.connectToRoom(room);
-            else curRoom=server.createRoom(room);
+            if (server.roomIsCreat(room)) curRoom = server.connectToRoom(room);
+            else curRoom = server.createRoom(room);
             if (isWorking) {
                 if (curRoom != null) {
-                    curRoom.user.add(this);
-                    synchronized (curRoom) {
-                        Iterator<Connection> iter = curRoom.user.iterator();
-                        while (iter.hasNext()) {
-                            ((Connection) iter.next()).out.println(name + " теперь в комнате");
+                    if (curRoom.user.size() < 2) {
+                        curRoom.user.add(this);
+                        synchronized (curRoom) {
+                            for (Connection connection : curRoom.user) {
+                                connection.out.println(name + " теперь в комнате");
+                            }
+                        }
+                        if (curRoom.user.size() == 2) {
+                            Iterator<Connection> iter = curRoom.user.iterator();
+                            int count = 0;
+                            while (iter.hasNext()) {
+                                if(count == 0)((Connection) iter.next()).out.println("41"); //4 - начало игры \ 1 - начинает первым
+                                else ((Connection) iter.next()).out.println("42");  //4 - начало игры \ 2 - начинает вторым
+                                count++;
+                            }
                         }
                     }
-
-                }else{
-                    out.println("Комната заполнена");
+                    else{
+                        out.println("Комната заполнена");
+                        close(true);
+                    }
+                } else {
+                    out.println("Комната не существует");
+                    close(true);
                 }
             }
 
-                String str = "";
-                while (true) {
-                    str = in.readLine();
-                    if (str.equals("\\q")) break;
-
+            String str = "";
+            while (true) {
+                str = in.readLine();
+                if (str.equals("\\q")) break;
                     synchronized (curRoom) {
                         Iterator<Connection> iter = curRoom.user.iterator();
                         while (iter.hasNext()) {
                             ((Connection) iter.next()).out.println(str);
                         }
                     }
-                }
+            }
             synchronized (curRoom) {
                 Iterator<Connection> iter = curRoom.user.iterator();
                 while (iter.hasNext()) {
@@ -79,6 +92,16 @@ public class Connection extends Thread {
             e.printStackTrace();
         } finally {
             close(true);
+        }
+    }
+
+    private void startGame(){
+        Iterator<Connection> iter = curRoom.user.iterator();
+        int count = 0;
+        while (iter.hasNext()) {
+            if(count == 0)((Connection) iter.next()).out.println("41"); //4 - начало игры \ 1 - начинает первым
+            else ((Connection) iter.next()).out.println("42");  //4 - начало игры \ 2 - начинает вторым
+            count++;
         }
     }
 
