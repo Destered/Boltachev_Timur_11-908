@@ -55,8 +55,7 @@ public class GameWindow extends Application {
     int ship3 = 1;
     int ship2 = 1;
     int ship1 = 1;
-    /*final int MAX_ENEMY_POINT = ship4 * 4 + ship3 * 3 + ship2 * 2 + ship1;*/
-    final int MAX_ENEMY_POINT = 2;
+    final int MAX_ENEMY_POINT = ship4 * 4 + ship3 * 3 + ship2 * 2 + ship1;
     int enemyPoint = 0;
     Cell lastCell;
     boolean isFirstPlayer = false;
