@@ -144,17 +144,19 @@ public class Connection extends Thread {
     public void close(boolean fullclose) {
         try {
             curRoom.user.remove(this);
+            if(curRoom.user.size() == 0) server.roomList.remove(curRoom);
             server.connections.remove(this);
             in.close();
             if (fullclose) {
                 isWorking = false;
-                out.println("\\q");
+                out.println("f\\q");
                 socket.close();
             }
             out.close();
+            System.out.println("Close connection");
             if (server.connections.size() == 0) {
-                server.closeAll();
-                System.exit(0);
+                /*server.closeAll();
+                System.exit(0);*/
             }
         } catch (Exception e) {
             System.err.println("Траблы с закрытием");

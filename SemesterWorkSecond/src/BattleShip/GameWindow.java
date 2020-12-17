@@ -10,6 +10,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Point2D;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
@@ -54,7 +55,8 @@ public class GameWindow extends Application {
     int ship3 = 1;
     int ship2 = 1;
     int ship1 = 1;
-    final int MAX_ENEMY_POINT = ship4 * 4 + ship3 * 3 + ship2 * 2 + ship1;
+    /*final int MAX_ENEMY_POINT = ship4 * 4 + ship3 * 3 + ship2 * 2 + ship1;*/
+    final int MAX_ENEMY_POINT = 2;
     int enemyPoint = 0;
     Cell lastCell;
     boolean isFirstPlayer = false;
@@ -97,24 +99,24 @@ public class GameWindow extends Application {
 
     private void checkMessage(String message) {
         // 0 - ход| 1 - проигрыш | 3 - инфа | 4 - начало игры
-        int action = Integer.parseInt(message.charAt(0) + "");
+        String action = message.charAt(0) + "";
         String info;
         switch (action) {
-            case 1: {
-                gameOver(action);
+            case "1": {
+                gameOver();
                 break;
             }
-            case 0: {
+            case "0": {
                 info = message.substring(1);
                 getStep(info);
                 break;
             }
-            case 3: {
+            case "3": {
                 info = message.substring(1);
                 showMessage(info);
                 break;
             }
-            case 4: {
+            case "4": {
                 info = message.substring(1);
                 startGame(info);
                 break;
@@ -216,6 +218,7 @@ public class GameWindow extends Application {
                     box_enemy.add(e1, y, x);
                 }
             }
+            disableInterface(false);
         });
 
     }
@@ -287,7 +290,7 @@ public class GameWindow extends Application {
     }
 
 
-    private void gameOver(int action) {
+    private void gameOver() {
         disableInterface(true);
         showMessage("Вы проиграли");
         btn_restart.setVisible(true);
@@ -300,7 +303,13 @@ public class GameWindow extends Application {
     }
 
     public void disconnect() {
-        out.println("\\q");
+        out.println("f\\q");
+        resend.setStop();
+        try {
+            socket.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     private Cell[] getNeighbors(int x, int y) {
@@ -401,6 +410,24 @@ public class GameWindow extends Application {
 
     public void restartWindows() {
         setDisabledConnect(false);
+        resend.setStop();
+        ship4 = 1;
+        ship3 = 1;
+        ship2 = 1;
+        ship1 = 1;
+        lastCell = null;
+        isRun = false;
+        disableInterface(false);
+        isFirstPlayer = false;
+        enemyPoint = 0;
+        clearBoard();
+        enemyTurn = true;
         btn_restart.setVisible(false);
+    }
+
+    private void clearBoard() {
+                box_enemy.getChildren().clear();
+                box_player.getChildren().clear();
+
     }
 }

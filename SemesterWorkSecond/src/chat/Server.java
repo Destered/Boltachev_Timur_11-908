@@ -23,7 +23,6 @@ public class Server {
                 Connection con = new Connection(socket,this);
                 connections.add(con);
                 con.start();
-
             }
         } catch (IOException e) {
             e.printStackTrace();
