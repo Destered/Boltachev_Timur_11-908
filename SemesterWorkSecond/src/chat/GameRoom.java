@@ -6,7 +6,7 @@ import java.util.List;
 
 public class GameRoom {
     public int number;
-    public List<Connection> user = new ArrayList<>();
+    public List<Connection> user = new ArrayList();
     public boolean gameIsStart = false;
 
     public GameRoom(int number) {
