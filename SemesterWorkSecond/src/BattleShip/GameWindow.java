@@ -20,6 +20,8 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 import java.io.BufferedReader;
@@ -51,6 +53,12 @@ public class GameWindow extends Application {
     @FXML
     public TextField tf_usernameInput;
     public Button btn_restart;
+    public TextField tf_ipPort;
+    public Text text_enemyFieldInfo;
+    public Text text_playerFieldInfo;
+    public Text text_gameInfo;
+    private String ip;
+    private int port;
     int ship4 = 1;
     int ship3 = 1;
     int ship2 = 1;
@@ -79,7 +87,7 @@ public class GameWindow extends Application {
             loader = new FXMLLoader(getClass().getResource("/BattleShip/gameBoard.fxml"));
             root = loader.load();
             stage.setTitle("BattleShip");
-            stage.setScene(new Scene(root, 327, 792));
+            stage.setScene(new Scene(root, 714, 627));
             stage.setResizable(false);
             stage.sizeToScene();
         } catch (IOException e) {
@@ -91,8 +99,15 @@ public class GameWindow extends Application {
 
     private void setDisabledConnect(boolean disable) {
             btn_connectToTheRoom.setDisable(disable);
+            tf_ipPort.setEditable(!disable);
             tf_usernameInput.setEditable(!disable);
             tf_roomNum.setEditable(!disable);
+    }
+
+    private void setVisibleText(boolean visible){
+        text_enemyFieldInfo.setVisible(visible);
+        text_playerFieldInfo.setVisible(visible);
+        text_gameInfo.setVisible(visible);
     }
 
 
@@ -153,7 +168,10 @@ public class GameWindow extends Application {
 
     public void startConnection() {
         try {
-            socket = new Socket("localhost", 65001);
+            String [] inputDataToConnect = tf_ipPort.getText().split(":");
+            ip = inputDataToConnect[0];
+            port = Integer.parseInt(inputDataToConnect[1]);
+            socket = new Socket(ip,port);
             in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             out = new PrintWriter(socket.getOutputStream(), true);
             resend = new Resender(this);
@@ -218,12 +236,20 @@ public class GameWindow extends Application {
                 }
             }
             disableInterface(false);
+            setVisibleText(true);
+            setGameInfo("Выставьте корабли",Color.BLACK);
         });
 
     }
 
     private void sendCanStart() {
+        setGameInfo("Ожидайте начала игры",Color.BLACK);
         out.println("canStart");
+    }
+
+    private void setGameInfo(String text,Color color){
+        text_gameInfo.setText(text);
+        text_gameInfo.setFill(color);
     }
 
     public void sendMessage(String message) {
@@ -235,11 +261,13 @@ public class GameWindow extends Application {
     public void startMove() {
         enemyTurn = false;
         box_enemy.setDisable(false);
+        setGameInfo("Ваш ход",Color.GREEN);
     }
 
     public void endMove() {
         enemyTurn = true;
         box_enemy.setDisable(true);
+        setGameInfo("Ход противника",Color.RED);
     }
 
     public void getMessage(String message) {
@@ -274,6 +302,7 @@ public class GameWindow extends Application {
         } else if (coords[0].equals("continue")) {
             enemyPoint++;
             lastCell.setFill(Color.RED);
+            setGameInfo("Вы попали",Color.GREEN);
             if (enemyPoint == MAX_ENEMY_POINT) {
                 disableInterface(true);
                 showMessage("Вы победили");
@@ -294,6 +323,7 @@ public class GameWindow extends Application {
         showMessage("Вы проиграли");
         btn_restart.setVisible(true);
         disconnect();
+        setGameInfo("Игра окончена",Color.BLACK);
     }
 
     private void disableInterface(boolean disable) {
@@ -427,6 +457,7 @@ public class GameWindow extends Application {
     private void clearBoard() {
                 box_enemy.getChildren().clear();
                 box_player.getChildren().clear();
+                setVisibleText(false);
 
     }
 }
