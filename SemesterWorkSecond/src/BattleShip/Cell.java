@@ -10,7 +10,7 @@ public class Cell extends Rectangle {
     public boolean enemyBoard;
 
 
-    public Cell(int x, int y,boolean enemyBoard) {
+    public Cell(int x, int y, boolean enemyBoard) {
         super(25, 25);
         this.x = x;
         this.y = y;

@@ -5,17 +5,19 @@ import BattleShip.GameWindow;
 import java.io.IOException;
 
 public class Resender extends Thread {
-    private boolean stoped;
     GameWindow game;
+    private boolean stoped;
+
+    public Resender(GameWindow game) {
+        this.game = game;
+    }
+
+    public Resender() {
+    }
 
     public void setStop() {
         stoped = true;
     }
-
-    public Resender(GameWindow game){
-        this.game = game;
-    }
-    public Resender(){ }
 
     @Override
     public void run() {

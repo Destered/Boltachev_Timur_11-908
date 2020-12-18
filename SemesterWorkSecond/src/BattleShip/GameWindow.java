@@ -5,12 +5,10 @@ import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
-import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Point2D;
-import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
@@ -57,16 +55,16 @@ public class GameWindow extends Application {
     public Text text_enemyFieldInfo;
     public Text text_playerFieldInfo;
     public Text text_gameInfo;
-    private String ip;
-    private int port;
     int ship4 = 1;
-    int ship3 = 1;
-    int ship2 = 1;
-    int ship1 = 1;
+    int ship3 = 2;
+    int ship2 = 3;
+    int ship1 = 4;
     final int MAX_ENEMY_POINT = ship4 * 4 + ship3 * 3 + ship2 * 2 + ship1;
     int enemyPoint = 0;
     Cell lastCell;
     boolean isFirstPlayer = false;
+    private String ip;
+    private int port;
     private boolean isRun;
     private boolean enemyTurn = true;
 
@@ -98,13 +96,13 @@ public class GameWindow extends Application {
     }
 
     private void setDisabledConnect(boolean disable) {
-            btn_connectToTheRoom.setDisable(disable);
-            tf_ipPort.setEditable(!disable);
-            tf_usernameInput.setEditable(!disable);
-            tf_roomNum.setEditable(!disable);
+        btn_connectToTheRoom.setDisable(disable);
+        tf_ipPort.setEditable(!disable);
+        tf_usernameInput.setEditable(!disable);
+        tf_roomNum.setEditable(!disable);
     }
 
-    private void setVisibleText(boolean visible){
+    private void setVisibleText(boolean visible) {
         text_enemyFieldInfo.setVisible(visible);
         text_playerFieldInfo.setVisible(visible);
         text_gameInfo.setVisible(visible);
@@ -168,10 +166,10 @@ public class GameWindow extends Application {
 
     public void startConnection() {
         try {
-            String [] inputDataToConnect = tf_ipPort.getText().split(":");
+            String[] inputDataToConnect = tf_ipPort.getText().split(":");
             ip = inputDataToConnect[0];
             port = Integer.parseInt(inputDataToConnect[1]);
-            socket = new Socket(ip,port);
+            socket = new Socket(ip, port);
             in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             out = new PrintWriter(socket.getOutputStream(), true);
             resend = new Resender(this);
@@ -191,9 +189,17 @@ public class GameWindow extends Application {
             EventHandler<? super MouseEvent> enemyHandler = (EventHandler<MouseEvent>) event -> {
                 if (isRun) {
                     Cell cell = (Cell) event.getSource();
-                    cell.shoot();
-                    sendMessage("0shoot;" + cell.x + ";" + cell.y);
-                    lastCell = cell;
+                    if (event.getButton() == MouseButton.SECONDARY) {
+                        if (!cell.wasShot) {
+                            Paint cellColor = cell.getFill();
+                            if (cellColor == Color.LIGHTGRAY) cell.setFill(Color.LIGHTSKYBLUE);
+                            else if (cellColor == Color.LIGHTSKYBLUE) cell.setFill(Color.LIGHTGRAY);
+                        }
+                    } else {
+                        cell.shoot();
+                        sendMessage("0shoot;" + cell.x + ";" + cell.y);
+                        lastCell = cell;
+                    }
                 }
             };
 
@@ -237,17 +243,17 @@ public class GameWindow extends Application {
             }
             disableInterface(false);
             setVisibleText(true);
-            setGameInfo("Выставьте корабли",Color.BLACK);
+            setGameInfo("Выставьте корабли", Color.BLACK);
         });
 
     }
 
     private void sendCanStart() {
-        setGameInfo("Ожидайте начала игры",Color.BLACK);
+        setGameInfo("Ожидайте начала игры", Color.BLACK);
         out.println("canStart");
     }
 
-    private void setGameInfo(String text,Color color){
+    private void setGameInfo(String text, Color color) {
         text_gameInfo.setText(text);
         text_gameInfo.setFill(color);
     }
@@ -261,13 +267,13 @@ public class GameWindow extends Application {
     public void startMove() {
         enemyTurn = false;
         box_enemy.setDisable(false);
-        setGameInfo("Ваш ход",Color.GREEN);
+        setGameInfo("Ваш ход", Color.GREEN);
     }
 
     public void endMove() {
         enemyTurn = true;
         box_enemy.setDisable(true);
-        setGameInfo("Ход противника",Color.RED);
+        setGameInfo("Ход противника", Color.RED);
     }
 
     public void getMessage(String message) {
@@ -302,7 +308,7 @@ public class GameWindow extends Application {
         } else if (coords[0].equals("continue")) {
             enemyPoint++;
             lastCell.setFill(Color.RED);
-            setGameInfo("Вы попали",Color.GREEN);
+            setGameInfo("Вы попали", Color.GREEN);
             if (enemyPoint == MAX_ENEMY_POINT) {
                 disableInterface(true);
                 showMessage("Вы победили");
@@ -323,7 +329,7 @@ public class GameWindow extends Application {
         showMessage("Вы проиграли");
         btn_restart.setVisible(true);
         disconnect();
-        setGameInfo("Игра окончена",Color.BLACK);
+        setGameInfo("Игра окончена", Color.BLACK);
     }
 
     private void disableInterface(boolean disable) {
@@ -455,9 +461,9 @@ public class GameWindow extends Application {
     }
 
     private void clearBoard() {
-                box_enemy.getChildren().clear();
-                box_player.getChildren().clear();
-                setVisibleText(false);
+        box_enemy.getChildren().clear();
+        box_player.getChildren().clear();
+        setVisibleText(false);
 
     }
 }

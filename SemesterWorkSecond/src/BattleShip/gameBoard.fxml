@@ -1,81 +1,86 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.TextArea?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
-
-<AnchorPane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="575.0" prefWidth="627.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="BattleShip.GameWindow">
-   <children>
-      <TextField fx:id="tf_roomNum" layoutX="14.0" layoutY="48.0" prefHeight="25.0" prefWidth="202.0" promptText="Введите номер комнаты" />
-      <Button fx:id="btn_connectToTheRoom" layoutX="245.0" layoutY="86.0" mnemonicParsing="false" onAction="#startConnection" text="Connect" />
-      <TextArea fx:id="ta_gameInfoPanel" editable="false" layoutX="14.0" layoutY="136.0" prefHeight="57.0" prefWidth="202.0" />
-      <TextField fx:id="tf_usernameInput" layoutX="14.0" layoutY="14.0" prefHeight="25.0" prefWidth="202.0" promptText="Введите ник" />
-      <GridPane fx:id="box_enemy" layoutX="48.0" layoutY="287.0" prefHeight="250.0" prefWidth="250.0">
-        <columnConstraints>
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-        </columnConstraints>
-        <rowConstraints>
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-        </rowConstraints>
-      </GridPane>
-      <GridPane fx:id="box_player" layoutX="341.0" layoutY="287.0" prefHeight="250.0" prefWidth="250.0">
-         <columnConstraints>
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-         </columnConstraints>
-          <rowConstraints>
-              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-          </rowConstraints>
-      </GridPane>
-      <Button fx:id="btn_restart" layoutX="247.0" layoutY="14.0" mnemonicParsing="false" onAction="#restartWindows" text="Покинуть комнату" visible="false" />
-      <TextField fx:id="tf_ipPort" layoutX="14.0" layoutY="86.0" prefHeight="25.0" prefWidth="202.0" promptText="Введите ip:port" />
-      <Text fx:id="text_enemyFieldInfo" layoutX="125.0" layoutY="243.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Поле противника" visible="false" />
-      <Text fx:id="text_playerFieldInfo" layoutX="437.0" layoutY="243.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ваше поле" visible="false" />
-      <Text fx:id="text_gameInfo" layoutX="298.0" layoutY="172.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="210.13671875">
-         <font>
-            <Font size="20.0" />
-         </font>
-      </Text>
-   </children>
+<AnchorPane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+            prefHeight="575.0" prefWidth="627.0" xmlns="http://javafx.com/javafx/8.0.171"
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="BattleShip.GameWindow">
+    <children>
+        <TextField fx:id="tf_roomNum" layoutX="14.0" layoutY="48.0" prefHeight="25.0" prefWidth="202.0"
+                   promptText="Введите номер комнаты"/>
+        <Button fx:id="btn_connectToTheRoom" layoutX="245.0" layoutY="86.0" mnemonicParsing="false"
+                onAction="#startConnection" text="Connect"/>
+        <TextArea fx:id="ta_gameInfoPanel" editable="false" layoutX="14.0" layoutY="136.0" prefHeight="57.0"
+                  prefWidth="202.0"/>
+        <TextField fx:id="tf_usernameInput" layoutX="14.0" layoutY="14.0" prefHeight="25.0" prefWidth="202.0"
+                   promptText="Введите ник"/>
+        <GridPane fx:id="box_enemy" layoutX="48.0" layoutY="287.0" prefHeight="250.0" prefWidth="250.0">
+            <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+            </rowConstraints>
+        </GridPane>
+        <GridPane fx:id="box_player" layoutX="341.0" layoutY="287.0" prefHeight="250.0" prefWidth="250.0">
+            <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+            </rowConstraints>
+        </GridPane>
+        <Button fx:id="btn_restart" layoutX="247.0" layoutY="14.0" mnemonicParsing="false" onAction="#restartWindows"
+                text="Покинуть комнату" visible="false"/>
+        <TextField fx:id="tf_ipPort" layoutX="14.0" layoutY="86.0" prefHeight="25.0" prefWidth="202.0"
+                   promptText="Введите ip:port"/>
+        <Text fx:id="text_enemyFieldInfo" layoutX="125.0" layoutY="243.0" strokeType="OUTSIDE" strokeWidth="0.0"
+              text="Поле противника" visible="false"/>
+        <Text fx:id="text_playerFieldInfo" layoutX="437.0" layoutY="243.0" strokeType="OUTSIDE" strokeWidth="0.0"
+              text="Ваше поле" visible="false"/>
+        <Text fx:id="text_gameInfo" layoutX="247.0" layoutY="172.0" strokeType="OUTSIDE" strokeWidth="0.0"
+              textAlignment="CENTER" wrappingWidth="364.13671875">
+            <font>
+                <Font size="20.0"/>
+            </font>
+        </Text>
+    </children>
 </AnchorPane>
