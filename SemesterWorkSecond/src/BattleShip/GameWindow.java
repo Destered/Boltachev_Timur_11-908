@@ -13,6 +13,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -85,6 +86,8 @@ public class GameWindow extends Application {
             loader = new FXMLLoader(getClass().getResource("/BattleShip/gameBoard.fxml"));
             root = loader.load();
             stage.setTitle("BattleShip");
+            Image icon = new Image("/icon.png");
+            stage.getIcons().add(icon);
             stage.setScene(new Scene(root, 714, 627));
             stage.setResizable(false);
             stage.sizeToScene();
@@ -281,6 +284,7 @@ public class GameWindow extends Application {
     }
 
     private void hasError(String info) {
+        System.exit(0);
     }
 
     private void getStep(String info) {
