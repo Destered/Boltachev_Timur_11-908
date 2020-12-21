@@ -13,6 +13,7 @@ public class Server extends Thread {
             Collections.synchronizedList(new ArrayList<Connection>());
     public List<GameRoom> roomList = new ArrayList<>();
     public ServerSocket server;
+    boolean run = true;
     int connectionId = 0;
 
     @Override
@@ -20,7 +21,7 @@ public class Server extends Thread {
         try {
             server = new ServerSocket(65001);
 
-            while (true) {
+            while (run) {
                 Socket socket = server.accept();
                 Connection con = new Connection(socket, this);
                 con.connectionId = connectionId;
@@ -64,6 +65,7 @@ public class Server extends Thread {
     public void closeAll() {
         try {
             server.close();
+            run = false;
 
             synchronized (connections) {
                 Iterator<Connection> iter = connections.iterator();

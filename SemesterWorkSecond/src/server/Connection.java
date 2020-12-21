@@ -110,6 +110,16 @@ public class Connection extends Thread {
         }
     }
 
+    public String getUsername(){
+        return name;
+    }
+    public int getRoomNum(){
+        return room;
+    }
+    public GameRoom getRoom(){
+        return curRoom;
+    }
+
     private boolean checkAllReady() {
         boolean allReady = true;
         if (curRoom.user.size() == 2) {

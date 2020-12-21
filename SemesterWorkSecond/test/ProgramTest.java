@@ -1,35 +1,56 @@
 import client.GameWindow;
-import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.*;
 import server.Connection;
+import server.GameRoom;
 import server.Server;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
 
-import java.io.IOException;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
 import java.net.Socket;
 
 
 class ProgramTest {
     static private Server server;
     private GameWindow gameWindow;
+    private BufferedReader in;
+    private PrintWriter out;
+    static private Socket socket;
     @BeforeEach
     public void startServer(){
         if(server != null) server.closeAll();
         server = new Server();
         server.start();
     }
-
-
-
+    @AfterEach
+    public void disconnect() throws Exception{
+        if(socket != null){
+            socket.close();
+        }
+        socket = null;
+    }
 
     @Test
     void connectionTest() throws Exception{
-        Socket socket = new Socket("localhost",65001);
+        socket = new Socket("localhost",65001);
         Connection con = new Connection(socket,server);
         Connection con1 = server.connections.get(0);
         Assertions.assertEquals(con1, con);
     }
+
+    private void setFlow(Socket socket) throws Exception{
+        in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+        out = new PrintWriter(socket.getOutputStream());
+    }
+
+    private Socket createSocket() throws Exception{
+        socket = new Socket("localhost",65001);
+        Thread.sleep(1000);
+        return socket;
+    }
+
+
+
 
     @Test
     void createRoom(){
@@ -39,25 +60,51 @@ class ProgramTest {
 
    @Test
     void serverDisconnect() throws Exception {
-           Socket socket = new Socket("localhost",65001);
-           Thread.sleep(1000);
+       socket = createSocket();
        server.connections.get(0).close(true);
         Assertions.assertTrue(server.connections.isEmpty());
     }
 
     @Test
-    void gameWindowStartConnection() {
+    void setConnectionName() throws Exception {
+        socket = createSocket();
+        Connection connection = server.connections.get(0);
+        setFlow(socket);
+        out.println("Oleg");
+        out.flush();
+        Thread.sleep(1000);
+        Assertions.assertEquals("Oleg",connection.getUsername());
 
     }
 
+    @Test
+    void setRoomNum() throws Exception {
+        socket = createSocket();
+        Connection connection = server.connections.get(0);
+        setFlow(socket);
+        out.println("Oleg");
+        out.flush();
+        out.println("2");
+        out.flush();
+        Thread.sleep(1000);
+        Assertions.assertEquals(2,connection.getRoomNum());
+    }
+
+    @Test
+    void setGameRoom() throws Exception {
+        socket = createSocket();
+        Connection connection = server.connections.get(0);
+        setFlow(socket);
+        out.println("Oleg");
+        out.flush();
+        out.println("2");
+        out.flush();
+        Thread.sleep(1000);
+        GameRoom serverRoom = server.roomList.get(0);
+        Assertions.assertEquals(serverRoom,connection.getRoom());
+    }
 /*
-    @Test
-    void gameWindowSendMessage() {
-    }
 
-    @Test
-    void gameWindowStartMove() {
-    }
 
     @Test
     void gameWindowEndMove() {
