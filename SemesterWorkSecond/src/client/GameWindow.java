@@ -1,6 +1,6 @@
-package BattleShip;
+package client;
 
-import chat.Resender;
+import server.Resender;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
@@ -56,6 +56,8 @@ public class GameWindow extends Application {
     public Text text_enemyFieldInfo;
     public Text text_playerFieldInfo;
     public Text text_gameInfo;
+    public TextField tf_chatInput;
+    public Button btn_sendChatMessage;
     int ship4 = 1;
     int ship3 = 2;
     int ship2 = 3;
@@ -68,6 +70,7 @@ public class GameWindow extends Application {
     private int port;
     private boolean isRun;
     private boolean enemyTurn = true;
+    private String username;
 
     public static void main(String[] args) {
         launch(args);
@@ -83,9 +86,9 @@ public class GameWindow extends Application {
         stage = new Stage();
         FXMLLoader loader;
         try {
-            loader = new FXMLLoader(getClass().getResource("/BattleShip/gameBoard.fxml"));
+            loader = new FXMLLoader(getClass().getResource("/client/gameBoard.fxml"));
             root = loader.load();
-            stage.setTitle("BattleShip");
+            stage.setTitle("client");
             Image icon = new Image("/icon.png");
             stage.getIcons().add(icon);
             stage.setScene(new Scene(root, 714, 627));
@@ -113,7 +116,7 @@ public class GameWindow extends Application {
 
 
     private void checkMessage(String message) {
-        // 0 - ход| 1 - проигрыш | 3 - инфа | 4 - начало игры
+        // 0 - ход| 1 - проигрыш  | 3 - инфа,чат | 4 - начало игры
         String action = message.charAt(0) + "";
         String info;
         switch (action) {
@@ -160,11 +163,16 @@ public class GameWindow extends Application {
             endMove();
             showMessage("Вы начинаете вторым");
         }
-
+        hideChat(true);
     }
 
     private void showMessage(String info) {
         ta_gameInfoPanel.appendText("\n" + info);
+    }
+
+    private void hideChat(boolean hide){
+        tf_chatInput.setVisible(hide);
+        btn_sendChatMessage.setVisible(hide);
     }
 
     public void startConnection() {
@@ -177,7 +185,8 @@ public class GameWindow extends Application {
             out = new PrintWriter(socket.getOutputStream(), true);
             resend = new Resender(this);
             setDisabledConnect(true);
-            out.println(tf_usernameInput.getText().trim());
+            username = tf_usernameInput.getText().trim();
+            out.println(username);
             out.println(tf_roomNum.getText());
             resend.start();
             createBoard();
@@ -194,9 +203,14 @@ public class GameWindow extends Application {
                     Cell cell = (Cell) event.getSource();
                     if (event.getButton() == MouseButton.SECONDARY) {
                         if (!cell.wasShot) {
-                            Paint cellColor = cell.getFill();
-                            if (cellColor == Color.LIGHTGRAY) cell.setFill(Color.LIGHTSKYBLUE);
-                            else if (cellColor == Color.LIGHTSKYBLUE) cell.setFill(Color.LIGHTGRAY);
+                            if (cell.marked) {
+                                cell.marked = false;
+                                cell.setFill(Color.AQUA);
+                            }
+                            else {
+                                cell.marked = true;
+                                cell.setFill(Color.LIGHTGRAY);
+                            }
                         }
                     } else {
                         cell.shoot();
@@ -316,9 +330,9 @@ public class GameWindow extends Application {
             if (enemyPoint == MAX_ENEMY_POINT) {
                 disableInterface(true);
                 showMessage("Вы победили");
+                setGameInfo("Вы победили",Color.GREEN);
                 sendMessage("1");
                 btn_restart.setVisible(true);
-                disconnect();
             }
         }
     }
@@ -332,7 +346,6 @@ public class GameWindow extends Application {
         disableInterface(true);
         showMessage("Вы проиграли");
         btn_restart.setVisible(true);
-        disconnect();
         setGameInfo("Игра окончена", Color.BLACK);
     }
 
@@ -448,12 +461,15 @@ public class GameWindow extends Application {
     }
 
     public void restartWindows() {
+        disconnect();
         setDisabledConnect(false);
         resend.setStop();
         ship4 = 1;
-        ship3 = 1;
-        ship2 = 1;
-        ship1 = 1;
+        ship3 = 2;
+        hideChat(false);
+        ship2 = 3;
+        ship1 = 4;
+        ta_gameInfoPanel.setText("");
         lastCell = null;
         isRun = false;
         disableInterface(false);
@@ -468,6 +484,16 @@ public class GameWindow extends Application {
         box_enemy.getChildren().clear();
         box_player.getChildren().clear();
         setVisibleText(false);
-
     }
+
+    public void sendChatMessage() {
+        String msg = tf_chatInput.getText();
+        if(!msg.isEmpty() && isRun){
+            msg = "3" + username + ": " + msg;
+            tf_chatInput.setText("");
+            checkMessage(msg);
+            sendMessage(msg);
+        }
+    }
+
 }

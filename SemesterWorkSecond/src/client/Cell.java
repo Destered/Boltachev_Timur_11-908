@@ -1,4 +1,4 @@
-package BattleShip;
+package client;
 
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
@@ -8,6 +8,7 @@ public class Cell extends Rectangle {
     public Ship ship = null;
     public boolean wasShot = false;
     public boolean enemyBoard;
+    public boolean marked = false;
 
 
     public Cell(int x, int y, boolean enemyBoard) {

@@ -2,7 +2,7 @@
 
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.AnchorPane?>
-<AnchorPane fx:id="root" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="chat.ClientProgram">
+<AnchorPane fx:id="root" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="server.ClientProgram">
    <children>
       <Button fx:id="btn_send" layoutX="440.0" layoutY="361.0" mnemonicParsing="false" onAction="#sendMessage" text="Отправить" />
       <TextArea fx:id="tf_chatField" editable="false" layoutX="14.0" layoutY="46.0" prefHeight="308.0" prefWidth="500.0" />

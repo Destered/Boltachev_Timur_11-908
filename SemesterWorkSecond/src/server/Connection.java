@@ -1,4 +1,4 @@
-package chat;
+package server;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -6,6 +6,7 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.Iterator;
+import java.util.Objects;
 
 public class Connection extends Thread {
     public boolean isReady = false;
@@ -159,5 +160,19 @@ public class Connection extends Thread {
         } catch (Exception e) {
             System.err.println("Траблы с закрытием");
         }
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Connection that = (Connection) o;
+        return Objects.equals(socket, that.socket) &&
+                Objects.equals(server, that.server);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(socket, server);
     }
 }

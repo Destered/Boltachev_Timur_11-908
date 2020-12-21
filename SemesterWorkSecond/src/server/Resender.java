@@ -1,6 +1,6 @@
-package chat;
+package server;
 
-import BattleShip.GameWindow;
+import client.GameWindow;
 
 import java.io.IOException;
 

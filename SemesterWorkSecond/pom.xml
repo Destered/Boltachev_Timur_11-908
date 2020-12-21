@@ -6,13 +6,15 @@
     <artifactId>BattleShip</artifactId>
     <packaging>jar</packaging>
     <version>1.0</version>
-    <name>BattleShip</name>
+    <name>client</name>
     <groupId>src</groupId>
     <properties>
-        <base-class>BattleShip.GameWindow</base-class>
+        <base-class>server.ServerProgram</base-class>
         <!-- Other properties -->
     </properties>
+
     <build>
+
         <sourceDirectory>src</sourceDirectory>
         <resources>
             <resource>
@@ -22,6 +24,7 @@
                 </excludes>
             </resource>
         </resources>
+
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -46,4 +49,5 @@
             </plugin>
         </plugins>
     </build>
+
 </project>
