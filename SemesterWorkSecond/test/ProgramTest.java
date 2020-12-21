@@ -1,30 +1,34 @@
 import client.GameWindow;
+import org.junit.jupiter.api.BeforeEach;
 import server.Connection;
 import server.Server;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
+import java.io.IOException;
 import java.net.Socket;
 
 
 class ProgramTest {
     static private Server server;
     private GameWindow gameWindow;
-    @BeforeAll
-    static void setUp(){
-        new Thread(() -> server = new Server()).start();
-
+    @BeforeEach
+    public void startServer(){
+        if(server != null) server.closeAll();
+        server = new Server();
+        server.start();
     }
+
+
 
 
     @Test
     void connectionTest() throws Exception{
-        Thread.sleep(1000);
         Socket socket = new Socket("localhost",65001);
         Connection con = new Connection(socket,server);
-        System.out.println(server.connections.toString());
-        Assertions.assertEquals(con, server.connections.get(0));
+        Connection con1 = server.connections.get(0);
+        Assertions.assertEquals(con1, con);
     }
 
     @Test
@@ -33,15 +37,20 @@ class ProgramTest {
         Assertions.assertEquals(server.roomList.get(0).number, 1);
     }
 
-    @Test
-    void gameWindowStart() {
-
+   @Test
+    void serverDisconnect() throws Exception {
+           Socket socket = new Socket("localhost",65001);
+           Thread.sleep(1000);
+       server.connections.get(0).close(true);
+        Assertions.assertTrue(server.connections.isEmpty());
     }
 
     @Test
     void gameWindowStartConnection() {
+
     }
 
+/*
     @Test
     void gameWindowSendMessage() {
     }
@@ -97,5 +106,5 @@ class ProgramTest {
     @Test
     void ConnectionCheckCount(){
 
-    }
+    }*/
 }

@@ -8,19 +8,23 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
-public class Server {
+public class Server extends Thread {
     public List<Connection> connections =
             Collections.synchronizedList(new ArrayList<Connection>());
     public List<GameRoom> roomList = new ArrayList<>();
     public ServerSocket server;
+    int connectionId = 0;
 
-    public Server() {
+    @Override
+    public void run(){
         try {
             server = new ServerSocket(65001);
 
             while (true) {
                 Socket socket = server.accept();
                 Connection con = new Connection(socket, this);
+                con.connectionId = connectionId;
+                connectionId++;
                 connections.add(con);
                 con.start();
             }
@@ -29,6 +33,9 @@ public class Server {
         } finally {
             closeAll();
         }
+    }
+
+    public Server() {
     }
 
     public boolean roomIsCreat(int number) {

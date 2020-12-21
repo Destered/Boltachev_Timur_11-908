@@ -12,7 +12,7 @@ public class Connection extends Thread {
     public boolean isReady = false;
     private BufferedReader in;
     private PrintWriter out;
-    private Socket socket;
+    public Socket socket;
     private GameRoom curRoom;
     private Server server;
     private boolean isWorking = true;
@@ -20,6 +20,7 @@ public class Connection extends Thread {
     private int room = 0;
     private Connection firstPlayer;
     private Connection secondPlayer;
+    public int connectionId = 0;
 
     public Connection(Socket socket, Server server) {
         this.socket = socket;
@@ -144,7 +145,7 @@ public class Connection extends Thread {
         try {
             curRoom.user.remove(this);
             if (curRoom.user.size() == 0) server.roomList.remove(curRoom);
-            server.connections.remove(this);
+
             in.close();
             if (fullclose) {
                 isWorking = false;
@@ -160,6 +161,9 @@ public class Connection extends Thread {
         } catch (Exception e) {
             System.err.println("Траблы с закрытием");
         }
+        finally {
+            server.connections.remove(this);
+        }
     }
 
     @Override
@@ -167,12 +171,11 @@ public class Connection extends Thread {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Connection that = (Connection) o;
-        return Objects.equals(socket, that.socket) &&
-                Objects.equals(server, that.server);
+        return ((Connection) o).connectionId == that.connectionId;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(socket, server);
+        return Objects.hash(server);
     }
 }
