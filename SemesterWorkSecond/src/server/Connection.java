@@ -11,7 +11,7 @@ import java.util.Objects;
 public class Connection extends Thread {
     public boolean isReady = false;
     private BufferedReader in;
-    private PrintWriter out;
+    public PrintWriter out;
     public Socket socket;
     private GameRoom curRoom;
     private Server server;
@@ -153,21 +153,24 @@ public class Connection extends Thread {
 
     public void close(boolean fullclose) {
         try {
-            curRoom.user.remove(this);
-            if (curRoom.user.size() == 0) server.roomList.remove(curRoom);
+            if(curRoom!= null) {
+                curRoom.user.remove(this);
+                if (curRoom.user.size() == 0) server.roomList.remove(curRoom);
+            }
 
-            in.close();
+
             if (fullclose) {
                 isWorking = false;
                 out.println("f\\q");
                 socket.close();
+                server.connections.remove(this);
             }
-            out.close();
             System.out.println("Close connection");
             if (server.connections.size() == 0) {
-                /*server.closeAll();
-                System.exit(0);*/
+                server.closeAll();
             }
+            in.close();
+            out.close();
         } catch (Exception e) {
             System.err.println("Траблы с закрытием");
         }
