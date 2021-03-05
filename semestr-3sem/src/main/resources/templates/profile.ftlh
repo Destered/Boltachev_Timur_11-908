@@ -1,14 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Profile</title>
-</head>
-<body class="main">
-    <div>
-        <h3>Hello! It is your Profile</h3>
-    </div>
+<#include "./base/standartPage.ftl" />
 
-</div>
-</body>
-</html>
+<@standardPage>
+    <h1>Profile Page</h1>
+    <p>This bit replaces the nested tag in the layout</p>
+</@standardPage>

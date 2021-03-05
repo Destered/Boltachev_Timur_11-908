@@ -1,19 +1,23 @@
 package ru.destered.semestr3sem.controllers;
 
-import org.springframework.beans.factory.annotation.Autowired;
+
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.GetMapping;
-import ru.destered.semestr3sem.service.user_data.UserDataService;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
+@RequestMapping(value={"", "/", "home"})
+@RequiredArgsConstructor
 public class MainController {
-    @Autowired
-    private UserDataService userService;
 
-    @GetMapping("/")
-    public String getMainPage(Model model){
-        return "profile";
+    @GetMapping
+    public String getMainPage(@CookieValue(value = "AuthCookie", required = false) String cookieValue,
+                              @RequestParam(value = "error", required = false) String error,
+                              Model model){
+        return "main";
     }
-
 }
