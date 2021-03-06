@@ -8,10 +8,10 @@
         <version>2.4.3</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
-    <packaging>war</packaging>
+    <packaging>jar</packaging>
     <groupId>ru.destered</groupId>
-    <artifactId>semestr-3sem</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <artifactId>semestrovo4ka</artifactId>
+    <version>1</version>
     <name>semestr-3sem</name>
     <description>Demo project for Spring Boot</description>
     <properties>
@@ -52,10 +52,6 @@
             <groupId>org.postgresql</groupId>
             <artifactId>postgresql</artifactId>
             <scope>runtime</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.tomcat</groupId>
-            <artifactId>tomcat-jsp-api</artifactId>
         </dependency>
         <dependency>
             <groupId>org.projectlombok</groupId>

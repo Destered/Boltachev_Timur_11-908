@@ -1,16 +1,14 @@
 package ru.destered.semestr3sem.models;
 
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import ru.destered.semestr3sem.dto.forms.SignUpForm;
 
 import javax.persistence.*;
 import java.util.List;
 
-
+@Getter
+@Setter
 @Entity
 @Table(name = "users")
 @AllArgsConstructor
@@ -37,7 +35,6 @@ public class User {
             cascade = CascadeType.ALL)
     private List<Cookie> cookieList;
 
-    // TODO: 27.02.2021 - State
     private boolean proved;
 
     private String currentConfirmationCode;

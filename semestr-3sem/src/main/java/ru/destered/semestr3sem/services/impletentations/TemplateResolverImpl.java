@@ -12,15 +12,6 @@ import ru.destered.semestr3sem.services.interfaces.TemplateResolver;
 import java.io.IOException;
 import java.util.Map;
 
-/**
- * Created by IntelliJ IDEA.
- * User:  SimonOnBoard
- * Project:  spring-basic-course
- * Package:  com.itis.kpfu.education.simononboard.spring.basics.services.impletentations
- * Date:  26.02.2021
- * Time:  22:19
- */
-
 @Service
 @RequiredArgsConstructor
 public class TemplateResolverImpl implements TemplateResolver {

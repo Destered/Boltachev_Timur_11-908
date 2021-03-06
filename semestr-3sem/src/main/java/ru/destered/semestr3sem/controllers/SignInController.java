@@ -12,12 +12,12 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import ru.destered.semestr3sem.dto.forms.UserAuthForm;
 import ru.destered.semestr3sem.exceptions.LoginProcessErrorException;
-
 import ru.destered.semestr3sem.models.User;
 import ru.destered.semestr3sem.services.interfaces.CookieService;
 import ru.destered.semestr3sem.services.interfaces.SignInService;
 
 import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import java.util.List;
@@ -54,7 +54,8 @@ public class SignInController {
                              @Valid UserAuthForm signInForm,
                              BindingResult bindingResult,
                              RedirectAttributes redirectAttributes,
-                             HttpServletResponse httpServletResponse) {
+                             HttpServletResponse httpServletResponse,
+                             HttpServletRequest request) {
         if (cookieService.checkCookie(cookieValue)) {
             return authUserRedirectUrl;
         }
@@ -66,11 +67,17 @@ public class SignInController {
             return "redirect:/signIn";
         }
         User user = null;
-        if ((user = signInService.signIn(signInForm)) != null) {
-            Cookie cookie = cookieService.createCookie(user);
-            httpServletResponse.addCookie(cookie);
-            return authUserRedirectUrl;
-        }
+            if ((user = signInService.signIn(signInForm)) != null) {
+                if (user.isProved()) {
+                    Cookie cookie = cookieService.createCookie(user);
+                    httpServletResponse.addCookie(cookie);
+                    request.getSession().setAttribute("email", user.getEmail());
+                    return authUserRedirectUrl;
+                } else {
+                    redirectAttributes.addAttribute("error", "You need confirm your email");
+                    return "redirect:/signIn";
+                }
+            }
         redirectAttributes.addAttribute("error", "Login on password incorrect ( S W W )");
         return "redirect:/signIn";
     }

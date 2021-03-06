@@ -11,14 +11,6 @@ import ru.destered.semestr3sem.models.User;
 import ru.destered.semestr3sem.repositories.UsersRepository;
 import ru.destered.semestr3sem.services.interfaces.SignInService;
 
-/**
- * Created by IntelliJ IDEA.
- * User:  SimonOnBoard
- * Project:  spring-basic-course
- * Package:  com.itis.kpfu.education.simononboard.spring.basics.services.impletentations
- * Date:  26.02.2021
- * Time:  13:19
- */
 @Service
 @RequiredArgsConstructor
 public class SignInServiceImpl implements SignInService {

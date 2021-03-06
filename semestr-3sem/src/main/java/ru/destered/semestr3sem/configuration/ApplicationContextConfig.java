@@ -16,14 +16,7 @@ import java.util.Properties;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-/**
- * Created by IntelliJ IDEA.
- * User:  SimonOnBoard
- * Project:  spring-basic-course
- * Package:  com.itis.kpfu.education.simononboard.spring.basics.configuration
- * Date:  26.02.2021
- * Time:  10:55
- */
+
 
 @Configuration
 @PropertySource(value = "classpath:/application.properties")
@@ -31,13 +24,11 @@ import java.util.concurrent.Executors;
 public class ApplicationContextConfig {
     private final Environment environment;
 
-    // TODO: 26.02.2021 - посмореть разницу между шаблонным и абстрактным методом
     @Bean
     public PasswordEncoder encoder() {
         return new BCryptPasswordEncoder();
     }
 
-    // TODO: 26.02.2021 - добавить hikari connection pool
 
     @Bean
     public ExecutorService executorService() {

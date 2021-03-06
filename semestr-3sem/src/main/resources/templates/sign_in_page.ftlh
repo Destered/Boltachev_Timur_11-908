@@ -4,15 +4,18 @@
     <div>
     <#if error?has_content>
         <div class="reg-container">
-            <p>Error: ${error}</p>
+            <p><div class="alert alert-warning alert-dismissible fade show" role="alert">
+                ${error}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div></p>
         </div>
-    <#else>
-    </#if>
-    <#if info?has_content>
-        <div class="reg-container">
-            <p>info: ${info}</p>
+    <#elseif info?has_content>
+        <div class="alert alert-success" role="alert">
+            <h4 class="alert-heading">Поздравляю!</h4>
+            <p>Ваш аккаунт был зарегестрирован, перед входом нужно подтвердить электронную почту</p>
         </div>
-    <#else>
     </#if>
     <body>
     <div id="login">
@@ -24,8 +27,8 @@
                         <form id="login-form" class="form" action="/signIn" method="post">
                             <h3 class="text-center text-info">Login</h3>
                             <div class="form-group">
-                                <label for="username" class="text-info">Email:</label><br>
-                                <input type="text" name="email" id="username" class="form-control">
+                                <label for="email" class="text-info">Email:</label><br>
+                                <input type="text" name="email" id="email" class="form-control">
                             </div>
                             <div class="form-group">
                                 <label for="password" class="text-info">Password:</label><br>

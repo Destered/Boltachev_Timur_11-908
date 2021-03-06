@@ -2,5 +2,6 @@
 
 <@standardPage>
     <h1>Profile Page</h1>
-    <p>This bit replaces the nested tag in the layout</p>
+    <p>Username: ${username}</p>
+    <p>Email: ${email}</p>
 </@standardPage>

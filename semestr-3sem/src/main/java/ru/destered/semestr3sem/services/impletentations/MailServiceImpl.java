@@ -12,14 +12,6 @@ import ru.destered.semestr3sem.services.interfaces.TemplateProcessor;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * Created by IntelliJ IDEA.
- * User:  SimonOnBoard
- * Project:  spring-basic-course
- * Package:  com.itis.kpfu.education.simononboard.spring.basics.services.impletentations
- * Date:  26.02.2021
- * Time:  20:09
- */
 @Service
 @RequiredArgsConstructor
 public class MailServiceImpl implements MailService {

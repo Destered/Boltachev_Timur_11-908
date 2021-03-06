@@ -1,13 +1,12 @@
 package ru.destered.semestr3sem.models;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
-
+@Getter
+@Setter
 @Entity
 @Table(name = "cookie")
 @AllArgsConstructor

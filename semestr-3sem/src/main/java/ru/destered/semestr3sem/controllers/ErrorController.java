@@ -12,6 +12,7 @@ public class ErrorController {
 
     @GetMapping
     public String getErrorPage(){
+        System.out.println("check error");
         return "error";
     }
 }
