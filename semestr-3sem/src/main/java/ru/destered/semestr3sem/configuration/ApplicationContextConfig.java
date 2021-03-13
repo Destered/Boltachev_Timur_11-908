@@ -1,6 +1,7 @@
 package ru.destered.semestr3sem.configuration;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.boot.web.servlet.MultipartConfigFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
@@ -9,7 +10,9 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.util.unit.DataSize;
 
+import javax.servlet.MultipartConfigElement;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
@@ -24,10 +27,15 @@ import java.util.concurrent.Executors;
 public class ApplicationContextConfig {
     private final Environment environment;
 
+    /**
+     *
+     * @return возвращает энкодер системы
+     */
     @Bean
     public PasswordEncoder encoder() {
         return new BCryptPasswordEncoder();
     }
+
 
 
     @Bean
@@ -62,4 +70,13 @@ public class ApplicationContextConfig {
 
         return mailSender;
     }
+
+    @Bean
+    MultipartConfigElement multipartConfigElement() {
+        MultipartConfigFactory factory = new MultipartConfigFactory();
+        factory.setMaxFileSize(DataSize.parse("400KB"));
+        factory.setMaxRequestSize(DataSize.parse("400KB"));
+        return factory.createMultipartConfig();
+    }
+
 }
