@@ -24,11 +24,7 @@ public class LogoutController {
                          @RequestParam(value = "error", required = false) String error,
                          HttpServletResponse httpServletResponse,
                          Model model){
-        if (cookieService.checkCookie(cookieValue)) {
-                Cookie cookie = new Cookie("AuthCookie",null);
-                cookie.setMaxAge(0);
-                httpServletResponse.addCookie(cookie);
-        }
+
         return "redirect:/signIn";
     }
 }

@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import ru.destered.semestr3sem.services.interfaces.CookieService;
 
 @Controller
-@RequestMapping(value={"", "/", "/home"})
+@RequestMapping(value={"/home"})
 @RequiredArgsConstructor
 public class MainController {
    private CookieService cookieService;
@@ -20,9 +20,6 @@ public class MainController {
     public String getMainPage(@CookieValue(value = "AuthCookie", required = false) String cookieValue,
                               @RequestParam(value = "error", required = false) String error,
                               Model model){
-        if(cookieValue != null && cookieService.checkCookie(cookieValue)){
-            model.addAttribute("isLogged", "true");
-        }
         System.out.println("check main");
         return "main";
     }

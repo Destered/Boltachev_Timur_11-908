@@ -40,45 +40,9 @@ public class SignInController {
                                 @RequestParam(value = "error", required = false) String error,
                                 @RequestParam(value = "info", required = false) String info,
                                 Model model) {
-        if (cookieService.checkCookie(cookieValue)) {
-            return authUserRedirectUrl;
-        }
+
         model.addAttribute("error", error);
         model.addAttribute("info", info);
         return "sign_in_page";
-    }
-
-    @PostMapping
-    @SneakyThrows(LoginProcessErrorException.class)
-    public String signInUser(@CookieValue(value = "AuthCookie", required = false) String cookieValue,
-                             @Valid UserAuthForm signInForm,
-                             BindingResult bindingResult,
-                             RedirectAttributes redirectAttributes,
-                             HttpServletResponse httpServletResponse,
-                             HttpServletRequest request) {
-        if (cookieService.checkCookie(cookieValue)) {
-            return authUserRedirectUrl;
-        }
-        if (bindingResult.hasErrors()) {
-            List<String> errorsList = bindingResult.getAllErrors().stream()
-                    .map(DefaultMessageSourceResolvable::getDefaultMessage)
-                    .collect(Collectors.toList());
-            redirectAttributes.addAttribute("error", errorsList.toString());
-            return "redirect:/signIn";
-        }
-        User user = null;
-            if ((user = signInService.signIn(signInForm)) != null) {
-                if (user.isProved()) {
-                    Cookie cookie = cookieService.createCookie(user);
-                    httpServletResponse.addCookie(cookie);
-                    request.getSession().setAttribute("email", user.getEmail());
-                    return authUserRedirectUrl;
-                } else {
-                    redirectAttributes.addAttribute("error", "You need confirm your email");
-                    return "redirect:/signIn";
-                }
-            }
-        redirectAttributes.addAttribute("error", "Login on password incorrect ( S W W )");
-        return "redirect:/signIn";
     }
 }

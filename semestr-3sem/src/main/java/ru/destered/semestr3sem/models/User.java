@@ -29,6 +29,33 @@ public class User {
     @Column(name = "username", nullable = false)
     private String username;
 
+    @Enumerated(value = EnumType.STRING)
+    private State state;
+
+    @Enumerated(value = EnumType.STRING)
+    private Role role;
+
+    public enum State {
+        ACTIVE, BANNED
+    }
+
+    public enum Role {
+        USER, ADMIN
+    }
+
+    public boolean isActive() {
+        return this.state == State.ACTIVE;
+    }
+
+    public boolean isAdmin() {
+        return this.role == Role.ADMIN;
+    }
+
+    public boolean isBanned() {
+        return this.state == State.BANNED;
+    }
+
+
     @OneToMany(mappedBy = "user",
             orphanRemoval = true,
             fetch = FetchType.LAZY,
@@ -47,6 +74,8 @@ public class User {
         return User.builder()
                 .email(form.getEmail())
                 .username(form.getUsername())
+                .role(Role.USER)
+                .state(State.ACTIVE)
                 .build();
     }
 }

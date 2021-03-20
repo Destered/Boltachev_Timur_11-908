@@ -36,9 +36,7 @@ public class SignUpController {
     public String getSignUpPage(@CookieValue(value = "AuthCookie", required = false) String cookieValue,
                                 @RequestParam(value = "error", required = false) String error,
                                 Model model) {
-        if (cookieService.checkCookie(cookieValue)) {
-            return authUserRedirectUrl;
-        }
+
         model.addAttribute("error", error);
         return "sign_up_page";
     }
@@ -48,9 +46,7 @@ public class SignUpController {
                          @Valid SignUpForm form,
                          BindingResult bindingResult,
                          RedirectAttributes redirectAttributes) {
-        if (cookieService.checkCookie(cookieValue)) {
-            return authUserRedirectUrl;
-        }
+
         if (bindingResult.hasErrors()) {
             List<String> errorsList = bindingResult.getAllErrors().stream()
                     .map(DefaultMessageSourceResolvable::getDefaultMessage)
