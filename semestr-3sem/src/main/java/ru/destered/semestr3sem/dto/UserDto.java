@@ -25,4 +25,9 @@ public class UserDto {
                 .email(user.getEmail())
                 .build();
     }
+
+    @Override
+    public String toString() {
+        return id+";"+username+";"+email;
+    }
 }

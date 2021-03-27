@@ -18,7 +18,12 @@ public class UserSearchServiceImpl implements UserSearchService {
 
     @Override
     public Page<UserDto> findAllByRequestBody(SearchForm searchForm) {
-        PageRequest pageRequest = PageRequest.of(searchForm.getPage() - 1, searchForm.getSize(), Sort.unsorted());
+
+        int page = searchForm.getPage();
+        if(page != 0) page -=1;
+        int size = searchForm.getSize();
+        if(size == 0) size = 10;
+        PageRequest pageRequest = PageRequest.of(page, size, Sort.unsorted());
         Page<User> userList = usersRepository.findAllByUsernameIgnoreCase(searchForm.getName(), pageRequest);
         return userList.map(UserDto::fromUser);
     }

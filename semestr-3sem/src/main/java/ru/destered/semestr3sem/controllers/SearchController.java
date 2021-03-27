@@ -12,6 +12,9 @@ import ru.destered.semestr3sem.dto.UserDto;
 import ru.destered.semestr3sem.security.UserDetailsImpl;
 import ru.destered.semestr3sem.services.interfaces.UserSearchService;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Controller
 @RequestMapping("/search")
 @RequiredArgsConstructor
@@ -22,9 +25,14 @@ public class SearchController {
     @PreAuthorize("hasAuthority('USER')")
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public Page<UserDto> getUsersBySearchForm(@AuthenticationPrincipal UserDetailsImpl userDetails, @RequestBody SearchForm searchForm) {
-        // TODO: 20.03.2021 c userDetails придумайте здесь что делать самостоятельно - например уменьшать количество запросов на поиск в час/минуту
-        return userSearchService.findAllByRequestBody(searchForm);
+    public List<String> getUsersBySearchForm(@AuthenticationPrincipal UserDetailsImpl userDetails, @RequestBody SearchForm searchForm) {
+        Page<UserDto> result = userSearchService.findAllByRequestBody(searchForm);
+        List<String> answer = new ArrayList<>();
+
+        result.getContent().forEach( user ->
+                answer.add(user.toString())
+        );
+        return answer;
     }
 
     @PreAuthorize("hasAuthority('USER')")
