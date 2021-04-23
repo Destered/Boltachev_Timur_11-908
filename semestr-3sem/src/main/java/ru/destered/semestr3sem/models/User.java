@@ -1,14 +1,18 @@
 package ru.destered.semestr3sem.models;
 
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import ru.destered.semestr3sem.dto.forms.SignUpForm;
 
 import javax.persistence.*;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
-@Getter
-@Setter
+
 @Entity
 @Table(name = "users")
 @AllArgsConstructor
@@ -17,16 +21,21 @@ import java.util.List;
 @Data
 public class User {
     @Id
+    @NotNull
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "email", nullable = false)
+    @Column(name = "email")
+    @NotNull
     private String email;
 
-    @Column(name = "password", nullable = false)
+    @Column(name = "password")
+    @NotNull
+    @Min(6)
     private String password;
 
-    @Column(name = "username", nullable = false)
+    @Column(name = "username")
+    @NotNull
     private String username;
 
     @Enumerated(value = EnumType.STRING)

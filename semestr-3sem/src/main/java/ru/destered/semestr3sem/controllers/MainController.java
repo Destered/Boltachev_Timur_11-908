@@ -2,6 +2,7 @@ package ru.destered.semestr3sem.controllers;
 
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CookieValue;
@@ -19,8 +20,8 @@ public class MainController {
     @GetMapping
     public String getMainPage(@CookieValue(value = "AuthCookie", required = false) String cookieValue,
                               @RequestParam(value = "error", required = false) String error,
-                              Model model){
-        System.out.println("check main");
+                              Model model, Authentication authentication){
+        if(authentication != null) model.addAttribute("isLogged","true");
         return "main";
     }
 }

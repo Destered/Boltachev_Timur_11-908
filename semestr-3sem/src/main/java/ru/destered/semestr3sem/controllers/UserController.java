@@ -47,6 +47,8 @@ public class UserController {
             throw new UsernameNotFoundException("User not found");
         }
 
+        model.addAttribute("isLogged","true");
+
 
         return "profile";
     }

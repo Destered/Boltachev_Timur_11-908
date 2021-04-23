@@ -35,6 +35,10 @@
                                 <input type="password" name="password" id="password" class="form-control">
                             </div>
                             <div class="form-group">
+                                <label for="remember" class="text-info">Remember me:</label><br>
+                                <input type="checkbox" name="justRememberMePls" id="remember"/>
+                            </div>
+                            <div class="form-group">
                                 <input type="submit" name="submit" class="btn btn-info btn-md" value="Enter">
                             </div>
                             <div id="register-link" class="text-right">

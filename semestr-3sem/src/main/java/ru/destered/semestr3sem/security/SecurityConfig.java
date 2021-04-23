@@ -11,7 +11,9 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl;
 import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
+import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+import ru.destered.semestr3sem.security.filter.AuthorisationFilter;
 
 import javax.sql.DataSource;
 
@@ -32,10 +34,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/signUp").permitAll()  // permitAll(), authentacited(), hasAuthority("ADMIN")
                 .antMatchers("/signIn").permitAll()
                 .antMatchers("/error").permitAll()
-                .antMatchers("/profile").authenticated()
+                .antMatchers("/profile/**").authenticated()
                 .antMatchers("/home").permitAll()
-                .antMatchers("/upload").authenticated()
-                .antMatchers("/download").authenticated()
+                .antMatchers("/upload/**").authenticated()
+                .antMatchers("/download/**").authenticated()
                 .antMatchers("/index").permitAll()
                 .and()
                 .formLogin()
@@ -50,7 +52,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .deleteCookies("JSESSIONID")
                 .and()
                 .rememberMe()
-                .rememberMeParameter("remember-me").tokenRepository(persistentTokenRepository());
+                .rememberMeParameter("justRememberMePls").tokenRepository(persistentTokenRepository()).key("remkey");
+
+        http.addFilterAfter(new AuthorisationFilter(), BasicAuthenticationFilter.class);
     }
 
     @Override

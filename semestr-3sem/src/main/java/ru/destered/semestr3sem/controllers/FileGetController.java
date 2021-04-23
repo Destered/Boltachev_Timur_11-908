@@ -32,6 +32,7 @@ public class FileGetController {
         //Если передать путь, то браузер выкенет ошибку тип загрузка локальных файлов, пашол атсюда чорт
         //Так что берём файл и переводим его
         String imgAsBase64 = "data:image/png;base64," + imgDataAsBase64;
+        model.addAttribute("isLogged","true");
         model.addAttribute("image",imgAsBase64);
         return "get_picture";
     }

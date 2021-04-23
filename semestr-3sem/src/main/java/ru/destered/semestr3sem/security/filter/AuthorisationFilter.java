@@ -27,6 +27,7 @@ public class AuthorisationFilter extends GenericFilterBean {
                 return;
             }
         }
+
         filterChain.doFilter(servletRequest, servletResponse);
     }
 }

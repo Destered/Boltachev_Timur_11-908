@@ -21,7 +21,6 @@ import java.util.List;
 public class SearchController {
     private final UserSearchService userSearchService;
 
-    // TODO: 20.03.2021 показать возможности Spring exLang
     @PreAuthorize("hasAuthority('USER')")
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
