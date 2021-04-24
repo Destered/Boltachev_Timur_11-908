@@ -9,7 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import ru.destered.semestr3sem.dto.SearchForm;
 import ru.destered.semestr3sem.dto.UserDto;
-import ru.destered.semestr3sem.security.UserDetailsImpl;
+import ru.destered.semestr3sem.security.details.UserDetailsImpl;
 import ru.destered.semestr3sem.services.interfaces.UserSearchService;
 
 import java.util.ArrayList;
